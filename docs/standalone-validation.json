@@ -1,0 +1,43 @@
+{
+  "passed": 9,
+  "failed": 0,
+  "tests": [
+    {
+      "test": "Public menu renders without authentication and exposes exact source data",
+      "result": "PASS"
+    },
+    {
+      "test": "Homepage and UTF-8 menu routes are separate and remain public",
+      "result": "PASS"
+    },
+    {
+      "test": "Every admin endpoint denies anonymous access",
+      "result": "PASS"
+    },
+    {
+      "test": "Real scrypt login rejects bad credentials and creates secure server sessions",
+      "result": "PASS"
+    },
+    {
+      "test": "Full authenticated write flow preserves cents and clears prices to null",
+      "result": "PASS"
+    },
+    {
+      "test": "Authorized sessions cannot perform cross-origin or invalid writes",
+      "result": "PASS"
+    },
+    {
+      "test": "Initial and current exports remain distinct and current revision prevents lost updates",
+      "result": "PASS"
+    },
+    {
+      "test": "Login attempts are rate limited",
+      "result": "PASS"
+    },
+    {
+      "test": "Logout revokes the session server-side",
+      "result": "PASS"
+    }
+  ],
+  "method": "Direct Node request-handler execution; browser and socket transport not verified."
+}

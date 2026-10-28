@@ -1,0 +1,10 @@
+node_modules
+.git
+.sites-runtime
+.wrangler
+.vinext
+dist
+outputs
+.env*
+.dev.vars*
+*.sqlite*

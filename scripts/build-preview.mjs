@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {stripTypeScriptTypes} from 'node:module';
+import {publicShell} from '../standalone/ui.mjs';
+const menu=JSON.parse(fs.readFileSync('data/initial-menu.json','utf8'));
+const shared=stripTypeScriptTypes(fs.readFileSync('lib/menu.ts','utf8').replace("import initial from '../data/initial-menu.json';",'const initial='+JSON.stringify(menu)+';'));
+const ui=fs.readFileSync('standalone/ui.mjs','utf8');
+let client=fs.readFileSync('standalone/menu-client.mjs','utf8').replace(/^import .*;\r?\n/gm,'');
+client=client.replace("setInterval(refresh,30000);document.addEventListener('visibilitychange',refresh);",'');
+const script=(shared+'\n'+ui+'\n'+client).replace(/<\/script/gi,'<\\/script');
+const content=publicShell().replace('<a href="/admin">Menü yönetimi ↗</a>','<span>Çevrimdışı önizleme</span>').replace('href="/"','href="#"');
+fs.writeFileSync('ONIZLEME.html','<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LOBBY PREMIUM LOUNGE — Önizleme</title><style>'+fs.readFileSync('app/globals.css','utf8')+'</style></head><body>'+content+'<script id="initial-state" type="application/json">'+JSON.stringify({menu,revision:1}).replace(/</g,'\\u003c')+'</script><script type="module">'+script+'</script></body></html>');
+fs.writeFileSync('.sites-runtime/preview-syntax.mjs',script);
+console.log('ONIZLEME.html hazır.');

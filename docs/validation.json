@@ -1,0 +1,154 @@
+{
+  "categoryCount": 23,
+  "productCount": 158,
+  "nullPrices": 12,
+  "counts": [
+    {
+      "category": "Türk Kahveleri",
+      "count": 6
+    },
+    {
+      "category": "Çay Çeşitleri",
+      "count": 7
+    },
+    {
+      "category": "Bitki Çayları",
+      "count": 6
+    },
+    {
+      "category": "Sıcak İçecekler",
+      "count": 7
+    },
+    {
+      "category": "Sıcak Kahveler",
+      "count": 10
+    },
+    {
+      "category": "Soğuk Kahveler",
+      "count": 10
+    },
+    {
+      "category": "Smoothie",
+      "count": 10
+    },
+    {
+      "category": "Frozen",
+      "count": 10
+    },
+    {
+      "category": "Ferahlatıcı İçecekler",
+      "count": 8
+    },
+    {
+      "category": "Milkshake",
+      "count": 9
+    },
+    {
+      "category": "Soğuk İçecekler",
+      "count": 14
+    },
+    {
+      "category": "Vitamin Bar",
+      "count": 5
+    },
+    {
+      "category": "Tatlılar",
+      "count": 9
+    },
+    {
+      "category": "Sandviçler",
+      "count": 3
+    },
+    {
+      "category": "Atıştırmalıklar",
+      "count": 4
+    },
+    {
+      "category": "Meyveler ve Çerezler",
+      "count": 2
+    },
+    {
+      "category": "Soslu Tavuklar",
+      "count": 8
+    },
+    {
+      "category": "Pizzalar",
+      "count": 6
+    },
+    {
+      "category": "Salatalar",
+      "count": 4
+    },
+    {
+      "category": "Makarnalar",
+      "count": 6
+    },
+    {
+      "category": "Tostlar",
+      "count": 7
+    },
+    {
+      "category": "Gözlemeler",
+      "count": 5
+    },
+    {
+      "category": "Wrap / Quesadilla",
+      "count": 2
+    }
+  ],
+  "fieldDifferences": [],
+  "tests": [
+    {
+      "test": "Source checksum and title preserved",
+      "result": "PASS"
+    },
+    {
+      "test": "Independent field comparison of all 158 products and 23 categories",
+      "result": "PASS"
+    },
+    {
+      "test": "Exactly 9 desserts and 3 sandwiches have null prices",
+      "result": "PASS"
+    },
+    {
+      "test": "Approved prices, names, and category note",
+      "result": "PASS"
+    },
+    {
+      "test": "Turkish case, decomposed Unicode, and ASCII search",
+      "result": "PASS"
+    },
+    {
+      "test": "Null display empty and TL decimal precision",
+      "result": "PASS"
+    },
+    {
+      "test": "Reject invalid edits and preserve immutable source provenance",
+      "result": "PASS"
+    },
+    {
+      "test": "Pre-save changes identify exact before/after fields",
+      "result": "PASS"
+    },
+    {
+      "test": "Anonymous and non-admin reads, writes, exports rejected",
+      "result": "PASS"
+    },
+    {
+      "test": "Cross-origin writes rejected",
+      "result": "PASS"
+    },
+    {
+      "test": "Price update, clearing, restart durability and no reseed overwrite",
+      "result": "PASS"
+    },
+    {
+      "test": "Stale and racing revisions cannot overwrite saved data",
+      "result": "PASS"
+    },
+    {
+      "test": "Only administrator actions mutate data; audit and exports preserved",
+      "result": "PASS"
+    }
+  ]
+}

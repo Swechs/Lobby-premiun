@@ -1,0 +1,12 @@
+{
+  "projectId": "prj_Vr51OonR5o99kPzVIJ0QLtl3NOUM",
+  "orgId": "team_2jOTgiQX5BhrqRdoM3FcaMWW",
+  "deploymentId": "dpl_jnah1kXQLiET4GGXxr6mwNoUuBdR",
+  "url": "https://lobby-premium-menu-preview.vercel.app",
+  "menuUrl": "https://lobby-premium-menu-preview.vercel.app/men%C3%BC",
+  "immutableUrl": "https://lobby-premium-menu-preview-gnqvfap0f-sadik-ustas-projects.vercel.app",
+  "state": "READY",
+  "target": "production",
+  "purpose": "Student cafe homepage: okey, card games, social gatherings and food; bolder typography. Original verified menu remains at /menü. Static public preview; persistent management remains in standalone source.",
+  "authentication": "Public: Vercel SSO, password and IP protections are disabled; no expiring share link is used."
+}

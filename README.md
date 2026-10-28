@@ -1,76 +1,88 @@
-> Ana site: https://lobby-premium-menu-preview.vercel.app
-> Menü: https://lobby-premium-menu-preview.vercel.app/men%C3%BC
-> Herkese açık, güncel web sitesi sürümü. Hosting aktarımı: docs/WEB_SITE_KURULUM.md; güncel doğrulama: docs/ANA_SITE_TESLIM.md.
+# LOBBY PREMIUM LOUNGE — Web sitesi ve QR menü
 
-# LOBBY PREMIUM LOUNGE — QR Menü
+Öğrenci kafesi ana sayfası, doğrulanmış Türkçe dijital menü ve kalıcı veri kullanan korumalı yönetim uygulaması.
 
-Türkçe mobil menü, kalıcı fiyat/içerik düzenleme, yetkili yönetim, değişiklik önizlemesi ve veri dışa aktarma.
+- Ana site: https://lobby-premium-menu-preview.vercel.app
+- Dijital menü: https://lobby-premium-menu-preview.vercel.app/men%C3%BC
+- Depo: https://github.com/Swechs/Lobby-premiun
 
-## Hemen görüntüle
+Ana sayfa okey, kart oyunları, yemek ve arkadaş buluşmaları odağındadır. Güncel tasarım `website/` altında geliştirilir.
 
-`ONIZLEME.html` dosyasını tarayıcıda açın. 23 kategori ve 158 ürünle çalışan çevrimdışı tasarım önizlemesidir; arama ve kategori gezinmesi çalışır. Bu dosyadaki fiyat değişiklikleri kalıcı yönetim yerine geçmez.
+## Çalıştırma — Node.js 24
 
-## Ek paket kurmadan çalıştırma
-
-Node.js **24 veya üzeri** gerekir. Windows için:
-
-1. `YONETICI_PAROLASI.cmd` dosyasını açın; en az 12 karakterli yönetici parolanızı iki kez girin. Parola ekranda maskelenir ve yalnızca scrypt özeti saklanır.
-2. `BASLAT.cmd` dosyasını açın.
-3. Yerel menü: `http://127.0.0.1:4317`
-4. Yönetim: `http://127.0.0.1:4317/admin`
-
-Diğer sistemlerde proje klasöründe:
+Bu çalışma biçimi ek npm paketi kurmadan çalışır:
 
 ```sh
-node standalone/setup-admin.mjs
 node standalone/server.mjs
 ```
 
-Parola tanımlanmadan menü görüntülenebilir; yönetim oturumu açılamaz. `127.0.0.1` yalnızca uygulamanın çalıştığı bilgisayardır, genel yayın adresi değildir.
+Windows'ta `BASLAT.cmd` de kullanılabilir. Varsayılan yerel adres `http://127.0.0.1:4317` olur.
 
-Kalıcı veriler varsayılan olarak `.sites-runtime/standalone/menu.sqlite` içinde tutulur. Başlangıç aktarımı yalnızca boş veritabanında çalışır; sunucu yeniden başlatılırken yönetici değişiklikleri üzerine yazılmaz. `LOBBY_DATA_DIR` ile kalıcı disk konumu değiştirilebilir. Bu klasörü ve parola dosyasını internete açık bir dizine koymayın.
+| Yol | İşlev |
+| --- | --- |
+| `/` | Ana web sitesi |
+| `/menü` | Ziyaretçi menüsü |
+| `/menu` | `/menü` yönlendirmesi |
+| `/admin` | Yönetici girişi ve içerik düzenleme |
 
-## Yönetim kullanımı
+Yerel adres yalnızca uygulamanın çalıştığı bilgisayarda açılır; genel yayın adresi değildir.
 
-Kategori seçin; kategori adı, açıklaması ve sırasını düzenleyin. Ürün fiyatını değiştirin veya yanındaki × düğmesiyle temizleyin. Ürünün adını, açıklamasını, kategorisini ve sırasını “İçerik ve sıralama” bölümünden düzenleyebilirsiniz. Düşük sıra değeri önce görünür; eşit sıra değerlerinde mevcut sıralama korunur.
+## Yönetim ve kalıcı veri
 
-“Değişiklikleri incele” alan bazlı eski/yeni değerleri gösterir. “Değişiklikleri kaydet” kalıcı kayıt yapar. Aynı sürümü iki oturum düzenlerse ikinci kayıt reddedilir; sayfayı yenileyerek güncel sürümü alın. Yenilemeden önce varsa kendi düzenlemelerinizi not edin.
+Yönetici parolasını sunucuda tanımlayın:
 
-Boş fiyat `null` olarak kaydedilir. Ziyaretçi ekranında fiyat yeri boş kalır. Kuruş hassasiyeti iki basamağa kadar korunur. Açık menü sayfaları görünürken 30 saniyede bir güncellemeleri kontrol eder; yeni açılan sayfa güncel veriyi alır.
+```sh
+node standalone/setup-admin.mjs
+```
 
-Başlangıç verisi ve güncel veri yönetim alanından ayrı ayrı JSON olarak dışa aktarılabilir. Sabit kimlikler, kaynak kategorisi ve kaynak satırları dışa aktarmada korunur. Bu sürüm mevcut 23 kategoriyi ve 158 ürünü düzenler; ürün ekleme/silme kapsam dışıdır.
+Windows'ta `YONETICI_PAROLASI.cmd` kullanılabilir. Parola maskelenir ve yalnızca scrypt özeti saklanır. Parola tanımlanmadan menü açılır; yönetim oturumu açılamaz.
 
-## Doğrulama
+Kategori bilgileri, ürün adları/açıklamaları, sıralama ve fiyatlar düzenlenebilir. Kaydetmeden önce alan bazlı değişiklik önizlemesi gösterilir. Fiyat temizlemek `null` kaydeder; kuruş hassasiyeti iki basamağa kadar korunur. Sürüm kontrolü eşzamanlı değişikliklerin birbirini ezmesini önler.
+
+Kalıcı veri varsayılan olarak `.sites-runtime/standalone/menu.sqlite` içinde tutulur. `LOBBY_DATA_DIR` ile kalıcı disk konumu değiştirilebilir. İlk veri aktarımı yalnızca boş veritabanında gerçekleşir. Sunucu yeniden başlatıldığında yönetici değişiklikleri korunur.
+
+Başlangıç verisi ve güncel veri yönetim ekranından ayrı JSON dosyaları olarak dışa aktarılır. Sabit kimlikler ve kaynak kategorisi/satırı bilgileri korunur. Yönetici parolası, ortam dosyaları ve gerçek veritabanı Git deposuna dahil değildir.
+
+## Statik yayın / Vercel
+
+```sh
+node scripts/build-website.mjs
+```
+
+Yayın dosyaları `vercel-preview/public/` içine üretilir; Vercel ayarı `vercel-preview/vercel.json` içindedir. Apache uyumlu `.htaccess` de hazırlanır.
+
+**Mevcut Vercel yayını statik ana site ve menüdür.** Korumalı yönetim sunucusu Vercel'e dağıtılmış değildir. Statik çıktı yönetici değişikliklerini kendiliğinden almaz. Kalıcı yönetim için Node 24 ve kalıcı disk sunan hosting kullanılmalıdır.
+
+Hosting aktarımı: [docs/WEB_SITE_KURULUM.md](docs/WEB_SITE_KURULUM.md). Güncel yayın ve doğrulama notları: [docs/ANA_SITE_TESLIM.md](docs/ANA_SITE_TESLIM.md).
+
+Gerçek alan adı henüz bağlanmadı. Basılacak QR, son genel menü URL'si kesinleşip doğrulandıktan sonra `scripts/generate-qr.py` ile SVG ve PNG olarak üretilebilir. Gerçek telefonla QR okuma testi henüz yapılmadı.
+
+## Menü kaynağı ve doğrulama
+
+Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı değiştirilmedi. İlk veri `data/initial-menu.json` içinde bulunur.
+
+- 23 kategori, 158 ürün.
+- 9 tatlı ve 3 kruvasan sandviç: toplam 12 `null` fiyat.
+- Burgerler ve Hemingway yok.
+- Kaynakla ürün adı, açıklama ve dolu fiyat karşılaştırması: 0 fark.
+- Türkçe karakterlere uygun arama, kategori gezinmesi ve boş fiyat gösterimi.
 
 ```sh
 node scripts/test-all.mjs
 ```
 
-21 kontrol başarılı: kaynakla alan eşleşmesi, Türkçe/Unicode arama, boş fiyat, kuruş hassasiyeti, kimlik ve kaynak izlenebilirliği, yetkisiz erişim, CSRF kontrolü, gerçek parola/oturum doğrulama, giriş denemesi sınırı, güncelleme/temizleme, veritabanı yeniden açıldığında kalıcılık, sürüm çakışması, işlem kaydı, dışa aktarma ve çıkışta oturum iptali.
+Son doğrulama: **22 test başarılı** — 13 kaynak/veri kontrolü ve 9 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Canlı statik sitede ayrıca mobil görünüm ve gezinme kontrol edildi; gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
 
-`docs/DOGRULAMA_RAPORU.md` kategori bazlı sayımı, metin farkını ve tamamlanamayan kontrolleri içerir. İstek işleyicisi testleri gerçek uygulama koduyla çalıştırılmıştır; tarayıcı ve ağ taşıması testinin yerine geçmez.
+Başlangıç verisini bilerek yeniden üretmek için `node scripts/import-menu.mjs` kullanılabilir. Bu işlem mevcut veritabanını değiştirmez. Canlı yönetici verisini ilk kaynakla değiştirmeyin; güncel veriyi yönetimden dışa aktararak koruyun.
 
-## Kaynak ve marka
+`ONIZLEME.html` ayrıca çevrimdışı menü önizlemesidir; kalıcı yönetimin yerine geçmez.
 
-Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; başlığı değiştirilmemiştir. İlk aktarım `data/initial-menu.json` içindedir. Aktarım komutunu yalnızca başlangıç verisini bilerek yeniden üretmek için çalıştırın:
+## Marka ve görseller
 
-```sh
-node scripts/import-menu.mjs
-node scripts/build-preview.mjs
-```
+Tipografik marka kullanılır; özgün monogram yeniden çizilmedi. Ana sayfada lisanslı bir atmosfer fotoğrafı bulunur; gerçek LOBBY mekânı/müşterileri olarak sunulmaz. Kaynak: [docs/GORSEL_KAYNAKLARI.md](docs/GORSEL_KAYNAKLARI.md). Dijital menüde ürün fotoğrafı eklenmedi.
 
-Mevcut veritabanını bu komutlar değiştirmez. Ürün kimlikleri ilk kaynak konumuna dayanır; canlı veriyi yeniden aktararak kimlik üretmeyin.
+Doğrulanmış adres, telefon, çalışma saatleri, sosyal hesaplar ve gerçek mekân fotoğrafları henüz sağlanmadığı için uydurulmadı.
 
-Marka tipografik kullanılmıştır. Özgün logo/monogram çizilmemiştir. Renkler verilen yaklaşık arayüz paletinden türetilmiştir. Sistem fontları Türkçe karakterleri destekler; dış font veya stok ürün görseli kullanılmamıştır.
+## Diğer kaynaklar
 
-## Yayın durumu
-
-**Canlı dağıtım tamamlanmadı. Genel menü URL’si ve basıma uygun QR dosyası henüz yok.** Yerel ortam paket sunucusunu ve kaynak deposunu çözemedi. Tarayıcı önizleme bağlantısı da zaman aşımına uğradı. 320 px görünüm, gerçek tarayıcı etkileşimleri ve gerçek telefonla QR okuma canlı ortamda kontrol edilmelidir.
-
-Yayın adımları: `docs/YAYIN.md`. Nihai genel URL doğrulandıktan sonra `scripts/generate-qr.py` SVG ve yüksek çözünürlüklü PNG üretir. Fiyat değişiklikleri URL’yi değiştirmez.
-
-## Sites uyarlaması
-
-`app/`, `db/`, `worker/`, `vite.config.ts` ve `.openai/hosting.json` Sites/Vinext sürümüdür. Bu sürümde kimlik doğrulama Sites tarafından, kalıcılık D1 tarafından sağlanır; yönetici e-posta izin listesi sunucu ortamındaki `ADMIN_EMAILS` değeridir. Tarayıcıya yönetici anahtarı gönderilmez. Sites proje kimliği korunmuştur; aynı proje için yeniden kayıt oluşturmayın.
-
-Sites sürümünün paket kurulumu ve derlemesi bu ortamda doğrulanamadı. Ek paket gerektirmeyen yerel sürüm kendi SQLite veritabanını ve parola oturumlarını kullanır. İki çalışma biçiminin veritabanları ayrıdır; biri diğerine otomatik eşitlenmez. Canlıya geçerken yönetimden alınan güncel JSON verisini kaybetmeyin; ilk yayın sırasında kaynak veri kullanılmalıdır.
+`app/`, `db/`, `worker/`, `vite.config.ts` ve `.openai/hosting.json` önceki Sites/Vinext uyarlamasını da içerir. Bu uyarlamanın paket kurulumu ve derlemesi bu ortamda doğrulanamadı; mevcut yayın bu framework üzerinden çalışmıyor. Node uygulaması `standalone/` altında, güncel ana sayfa ise `website/` altındadır. İki çalışma biçimi farklı veri kaynakları kullanır; otomatik eşitlenmez.
