@@ -1,12 +1,12 @@
 {
   "projectId": "prj_Vr51OonR5o99kPzVIJ0QLtl3NOUM",
   "orgId": "team_2jOTgiQX5BhrqRdoM3FcaMWW",
-  "deploymentId": "dpl_6wEjXbFcSLhgSRcFmbLGo1mGXDWo",
+  "deploymentId": "dpl_86ihNtNuXebYmPEdoD5Gw2z7MuEk",
   "url": "https://lobby-premium-menu-preview.vercel.app",
   "menuUrl": "https://lobby-premium-menu-preview.vercel.app/men%C3%BC",
-  "immutableUrl": "https://lobby-premium-menu-preview-qd7wmagso-sadik-ustas-projects.vercel.app",
+  "immutableUrl": "https://lobby-premium-menu-preview-kc6tzczhs-sadik-ustas-projects.vercel.app",
   "state": "READY",
   "target": "production",
-  "purpose": "9 Kasım 2026 menü revizyonu: Nargileler kategorisi ve dokuz tatlı fiyatı.",
+  "purpose": "Menu revision with waffles, filter coffee, Churchill, Red Bull, hookah and chicken descriptions.",
   "authentication": "Public: Vercel SSO, password and IP protections are disabled; no expiring share link is used."
 }

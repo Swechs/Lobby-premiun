@@ -61,8 +61,8 @@ Gerçek alan adı henüz bağlanmadı. Basılacak QR, son genel menü URL'si kes
 
 Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı değiştirilmedi. İlk veri `data/initial-menu.json` içinde bulunur.
 
-- 24 kategori, 162 ürün.
-- Dokuz tatlının fiyatı girildi. Üç kruvasan sandviçte fiyat boş.
+- 25 kategori, 175 ürün.
+- Dokuz tatlının fiyatı girildi. Waffle çeşitleri, Filtre Kahve ve Churchill için fiyat alanları boş.
 - Burgerler ve Hemingway yok.
 - Kaynakla ürün adı, açıklama ve dolu fiyat karşılaştırması: 0 fark.
 - Türkçe karakterlere uygun arama, kategori gezinmesi ve boş fiyat gösterimi.

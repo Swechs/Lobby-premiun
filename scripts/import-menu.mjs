@@ -2,12 +2,19 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 export function parseMenu(text) {
- const categories=[],products=[]; let category=null;
+ const categories=[],products=[];
+ const addedCategoryIds=new Map([['Waffle','cat-25'],['Red Bull Kokteyl','cat-26']]);
+ let category=null,nextCategoryId=1;
  for(const [index,raw] of text.replace(/^\uFEFF/,'').split(/\r?\n/).entries()) {
   if(raw.startsWith('## ')) {
    const name=raw.slice(3);
-   category=/^(Doğrulama ve kaynak notları|Kategori bazında ürün sayımı)$/.test(name)?null:{id:`cat-${String(categories.length+1).padStart(2,'0')}`,name,description:'',sortOrder:categories.length,sourceName:name,sourceLine:index+1};
-   if(category)categories.push(category);
+   category=null;
+   if(/^(Doğrulama ve kaynak notları|Kategori bazında ürün sayımı)$/.test(name))continue;
+   // Keep the old sandwich ID retired so existing category links keep their meaning.
+   if(nextCategoryId===14)nextCategoryId++;
+   const id=addedCategoryIds.get(name)??`cat-${String(nextCategoryId++).padStart(2,'0')}`;
+   category={id,name,description:'',sortOrder:categories.length,sourceName:name,sourceLine:index+1};
+   categories.push(category);
   } else if(category && raw.startsWith('| ') && !raw.startsWith('| Ürün |') && !raw.startsWith('| ---')) {
    const cells=raw.split('|').slice(1,-1).map(s=>s.trim()); assert.equal(cells.length,3);
    const [name,priceText,description]=cells; assert.ok(!priceText || /^\d+(?:[.,]\d{1,2})? TL$/.test(priceText));
@@ -20,6 +27,6 @@ export function parseMenu(text) {
 if(process.argv[1]?.endsWith('import-menu.mjs')) {
  const menu=parseMenu(fs.readFileSync(process.argv[2]||'source/LOBBY_PREMIUM_ANA_MENU.md','utf8'));
  const counts={categories:menu.categories.length,products:menu.products.length,nullPrices:menu.products.filter(p=>p.price===null).length};
- assert.deepEqual(counts,{categories:24,products:162,nullPrices:3});assert.ok(!menu.products.some(p=>/burger|hemingway/i.test(p.name)));
+ assert.deepEqual(counts,{categories:25,products:175,nullPrices:4});assert.ok(!menu.products.some(p=>/burger|hemingway/i.test(p.name)));
  fs.mkdirSync('data',{recursive:true});fs.writeFileSync('data/initial-menu.json',JSON.stringify(menu,null,2)+'\n');console.log(JSON.stringify(counts));
 }

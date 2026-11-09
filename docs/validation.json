@@ -1,7 +1,7 @@
 {
-  "categoryCount": 24,
-  "productCount": 162,
-  "nullPrices": 3,
+  "categoryCount": 25,
+  "productCount": 175,
+  "nullPrices": 4,
   "counts": [
     {
       "category": "Türk Kahveleri",
@@ -21,7 +21,7 @@
     },
     {
       "category": "Sıcak Kahveler",
-      "count": 10
+      "count": 11
     },
     {
       "category": "Soğuk Kahveler",
@@ -37,7 +37,7 @@
     },
     {
       "category": "Ferahlatıcı İçecekler",
-      "count": 8
+      "count": 9
     },
     {
       "category": "Milkshake",
@@ -48,6 +48,10 @@
       "count": 14
     },
     {
+      "category": "Red Bull Kokteyl",
+      "count": 11
+    },
+    {
       "category": "Vitamin Bar",
       "count": 5
     },
@@ -56,8 +60,8 @@
       "count": 9
     },
     {
-      "category": "Sandviçler",
-      "count": 3
+      "category": "Waffle",
+      "count": 2
     },
     {
       "category": "Atıştırmalıklar",
@@ -97,7 +101,7 @@
     },
     {
       "category": "Nargileler",
-      "count": 4
+      "count": 5
     }
   ],
   "fieldDifferences": [],
@@ -107,11 +111,11 @@
       "result": "PASS"
     },
     {
-      "test": "Independent field comparison of all 162 products and 24 categories",
+      "test": "Independent field comparison of all 175 products and 25 categories",
       "result": "PASS"
     },
     {
-      "test": "Only the three sandwiches have null prices",
+      "test": "Only the four unpriced additions have null prices",
       "result": "PASS"
     },
     {

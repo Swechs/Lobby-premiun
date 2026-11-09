@@ -1,9 +1,14 @@
 import {env} from 'cloudflare:workers';
 import {initialMenu,changesBetween,validateMenu,type Change,type Menu,type MenuState} from './menu';
 
-const previousMenuChecksum='e91d202110894040af5ad2732456442bcdfc85b9364cca574c5b9c7ecfe73a3f';
+const originalMenuChecksum='e91d202110894040af5ad2732456442bcdfc85b9364cca574c5b9c7ecfe73a3f';
+const previousMenuChecksums=new Set([
+ originalMenuChecksum,
+ 'de8ae2ce9cf2f02139aa5eeb19806bd533b4143434b62dc4342199f8cdff8aaf'
+]);
+const retiredSandwichCategoryId='cat-14';
 
-function applyNovemberMenuUpdate(previous:Menu):Menu{
+function applyMenuRevision(previous:Menu):Menu{
  const categories=initialMenu.categories.map(source=>{
   const saved=previous.categories.find(category=>category.id===source.id);
   return saved?{...saved,sourceLine:source.sourceLine}:source;
@@ -11,8 +16,15 @@ function applyNovemberMenuUpdate(previous:Menu):Menu{
  const products=initialMenu.products.map(source=>{
   const saved=previous.products.find(product=>product.id===source.id);
   if(!saved)return source;
-  const price=source.sourceCategoryName==='Tatlılar'?source.price:saved.price;
-  return {...saved,price,sourceLine:source.sourceLine};
+  const updateDessertPrice=previous.sourceSha256===originalMenuChecksum&&source.sourceCategoryName==='Tatlılar';
+  const updatePrice=updateDessertPrice||source.sourceCategoryName==='Nargileler'||source.id==='cat-11-item-12';
+  const price=updatePrice?source.price:saved.price;
+  const name=source.id==='cat-24-item-03'?source.name:saved.name;
+  const description=source.sourceCategoryName==='Soslu Tavuklar'
+   ?saved.description.replace(/(?:jülyen|jülien) tavuk\b/giu,'tavuk göğsü')
+   :saved.description;
+  const categoryId=saved.categoryId===retiredSandwichCategoryId?source.categoryId:saved.categoryId;
+  return {...saved,name,description,price,categoryId,sourceLine:source.sourceLine};
  });
  return {...previous,sourceSha256:initialMenu.sourceSha256,categories,products};
 }
@@ -33,12 +45,12 @@ export async function readMenu():Promise<MenuState>{
   const row=await env.DB.prepare('SELECT content,revision,updated_at FROM menu_state WHERE id=?').bind('main').first<{content:string;revision:number;updated_at:string}>();
   if(!row)throw new Error('Menü okunamadı.');
   const menu=JSON.parse(row.content) as Menu;
-  if(menu.sourceSha256!==previousMenuChecksum)return {menu,revision:row.revision,updatedAt:row.updated_at};
-  const updated=applyNovemberMenuUpdate(menu);
+  if(!previousMenuChecksums.has(menu.sourceSha256))return {menu,revision:row.revision,updatedAt:row.updated_at};
+  const updated=applyMenuRevision(menu);
   validateMenu(updated);
   const changes=changesBetween(menu,updated);
-  changes.push({label:'Nargileler',field:'category',before:'(boş)',after:'4 ürün eklendi'});
-  const result=await writeRevision(updated,row.revision,'menu-source-update-2026-11-09',changes);
+  changes.push({label:'Menü yapısı',field:'category',before:'Sandviçler',after:'Waffle ve Red Bull Kokteyl'});
+  const result=await writeRevision(updated,row.revision,'menu-source-revision-2026-11-09',changes);
   if(result)return result;
  }
 }

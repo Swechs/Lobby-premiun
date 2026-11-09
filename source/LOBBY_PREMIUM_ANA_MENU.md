@@ -2,8 +2,8 @@
 
 ## Doğrulama ve kaynak notları
 
-- 9 Kasım 2026 güncellemesiyle Nargileler eklendi. Güncel sayım **24 kategori, 162 ürün**.
-- Tatlı fiyatları gönderilen listeden ve 270 TL teyidinden işlendi. Üç kruvasan sandviçin fiyat hücreleri boş bırakıldı.
+- 9 Kasım 2026 menü güncellemesi. Güncel sayım **25 kategori, 175 ürün**.
+- Tatlı fiyatları gönderilen listeden ve 270 TL teyidinden işlendi. Fiyatı henüz belirtilmeyen yeni ürünlerde fiyat alanı boş.
 - Burgerler ve Hemingway dahil edilmemiştir.
 - Vejetaryen Pizza, son gönderilen listede bulunduğu için 290 TL ve kaynak açıklamasıyla korunmuştur.
 - Ürün adları, dolu fiyatlar ve açıklamalar son gönderilen listeden aynen aktarılmıştır. Açıklaması olmayan ürünlere açıklama eklenmemiştir.
@@ -17,16 +17,17 @@
 | Çay Çeşitleri | 7 |
 | Bitki Çayları | 6 |
 | Sıcak İçecekler | 7 |
-| Sıcak Kahveler | 10 |
+| Sıcak Kahveler | 11 |
 | Soğuk Kahveler | 10 |
 | Smoothie | 10 |
 | Frozen | 10 |
-| Ferahlatıcı İçecekler | 8 |
+| Ferahlatıcı İçecekler | 9 |
 | Milkshake | 9 |
 | Soğuk İçecekler | 14 |
+| Red Bull Kokteyl | 11 |
 | Vitamin Bar | 5 |
 | Tatlılar | 9 |
-| Sandviçler | 3 |
+| Waffle | 2 |
 | Atıştırmalıklar | 4 |
 | Meyveler ve Çerezler | 2 |
 | Soslu Tavuklar | 8 |
@@ -36,8 +37,8 @@
 | Tostlar | 7 |
 | Gözlemeler | 5 |
 | Wrap / Quesadilla | 2 |
-| Nargileler | 4 |
-| **Toplam** | **162** |
+| Nargileler | 5 |
+| **Toplam** | **175** |
 
 ## Türk Kahveleri
 
@@ -99,6 +100,7 @@
 | White Chocolate Mocha | 170 TL |  |
 | Caramel Macchiato | 170 TL |  |
 | Spanish Latte | 170 TL |  |
+| Filtre Kahve |  |  |
 
 ## Soğuk Kahveler
 
@@ -157,6 +159,7 @@
 | Çilekli Mojito | 200 TL |  |
 | Cool Lime | 200 TL |  |
 | Kuzukulağı | 200 TL |  |
+| Churchill |  |  |
 
 ## Milkshake
 
@@ -187,9 +190,25 @@
 | Sade Soda | 70 TL |  |
 | Meyveli Soda | 80 TL |  |
 | Su | 40 TL |  |
-| Red Bull | 180 TL |  |
+| Red Bull | 150 TL |  |
 | Cappy Meyve Suyu | 110 TL |  |
 | Schweppes | 120 TL |  |
+
+## Red Bull Kokteyl
+
+| Ürün | Fiyat | Açıklama |
+| --- | --- | --- |
+| The Yellow Edition | 150 TL |  |
+| The Red Edition | 150 TL |  |
+| The Blue Edition | 150 TL |  |
+| The White Edition | 150 TL |  |
+| The Red Bull Classic | 150 TL |  |
+| The Red Bull Sugar Free | 150 TL |  |
+| The Yellow Edition Kokteyl | 220 TL |  |
+| The Winter Edition Kokteyl | 220 TL |  |
+| The Winter Edition Turunçgiller Kokteyl | 220 TL |  |
+| The White Edition Kokteyl | 220 TL |  |
+| The Lobby Spesiyal Edition | 220 TL |  |
 
 ## Vitamin Bar
 
@@ -215,13 +234,12 @@
 | Mozaik | 270 TL |  |
 | Devil's Cake | 280 TL |  |
 
-## Sandviçler
+## Waffle
 
 | Ürün | Fiyat | Açıklama |
 | --- | --- | --- |
-| Füme Cheddarlı Kruvasan |  | Füme, cheddar, mayonez, kıvırcık marul, domates. |
-| Üç Peynirli Kruvasan |  | Ezine peyniri, beyaz peynir, kaşar peyniri, ceviz içi, labne sos. |
-| Pestolu Kruvasan |  | Mozzarella peyniri, domates, taze fesleğen yaprakları, pesto sos. |
+| Klasik Waffle |  |  |
+| Beyaz Çikolatalı Waffle |  |  |
 
 ## Atıştırmalıklar
 
@@ -243,14 +261,14 @@
 
 | Ürün | Fiyat | Açıklama |
 | --- | --- | --- |
-| Köri Soslu Tavuk | 380 TL | Marine edilmiş jülyen tavuk, mantar, krema; makarna ve salata eşliğinde. |
-| Dağ Kekikli Tavuk | 380 TL | Marine edilmiş jülyen tavuk, mantar, krema; makarna ve salata eşliğinde. |
-| Cheddar Soslu Tavuk | 380 TL | Marine edilmiş jülyen tavuk, mantar, krema; makarna ve salata eşliğinde. |
-| Cafe de Paris Soslu Tavuk | 380 TL | Marine edilmiş jülyen tavuk, mantar, krema; makarna ve salata eşliğinde. |
-| Barbekü Soslu Tavuk | 350 TL | Marine edilmiş jülyen tavuk, kapya biber, yeşil biber; makarna ve salata eşliğinde. |
-| Sweet Chili Soslu Tavuk | 350 TL | Marine edilmiş jülyen tavuk, kapya biber, yeşil biber; makarna ve salata eşliğinde. |
-| Meksika Soslu Tavuk | 350 TL | Marine edilmiş jülyen tavuk, kapya biber, yeşil biber; makarna ve salata eşliğinde. |
-| Tavuk Çökertme | 410 TL | Kibrit patates, yoğurt, özel marine edilmiş jülyen tavuk. |
+| Köri Soslu Tavuk | 380 TL | Marine edilmiş tavuk göğsü, mantar, krema; makarna ve salata eşliğinde. |
+| Dağ Kekikli Tavuk | 380 TL | Marine edilmiş tavuk göğsü, mantar, krema; makarna ve salata eşliğinde. |
+| Cheddar Soslu Tavuk | 380 TL | Marine edilmiş tavuk göğsü, mantar, krema; makarna ve salata eşliğinde. |
+| Cafe de Paris Soslu Tavuk | 380 TL | Marine edilmiş tavuk göğsü, mantar, krema; makarna ve salata eşliğinde. |
+| Barbekü Soslu Tavuk | 350 TL | Marine edilmiş tavuk göğsü, kapya biber, yeşil biber; makarna ve salata eşliğinde. |
+| Sweet Chili Soslu Tavuk | 350 TL | Marine edilmiş tavuk göğsü, kapya biber, yeşil biber; makarna ve salata eşliğinde. |
+| Meksika Soslu Tavuk | 350 TL | Marine edilmiş tavuk göğsü, kapya biber, yeşil biber; makarna ve salata eşliğinde. |
+| Tavuk Çökertme | 410 TL | Kibrit patates, yoğurt, özel marine edilmiş tavuk göğsü. |
 
 ## Pizzalar
 
@@ -320,5 +338,6 @@ Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.
 | --- | --- | --- |
 | Standart | 550 TL |  |
 | Dark Leaf | 600 TL |  |
-| Premium | 650 TL |  |
+| Lobby Premium | 650 TL |  |
 | Cigar Leaf | 750 TL |  |
+| VIP Lobby Premium | 1000 TL |  |
