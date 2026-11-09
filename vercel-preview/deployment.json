@@ -1,13 +1,13 @@
 {
   "projectId": "prj_Vr51OonR5o99kPzVIJ0QLtl3NOUM",
   "orgId": "team_2jOTgiQX5BhrqRdoM3FcaMWW",
-  "deploymentId": "dpl_2kx4Sjcvtg3MF1ruZ8vQfVesiLfG",
+  "deploymentId": "dpl_Hh8Sy4bYzRJptqogQ1YKD8GaZBjD",
   "url": "https://lobby-premium-menu-preview.vercel.app",
   "menuUrl": "https://lobby-premium-menu-preview.vercel.app/men%C3%BC",
   "adminUrl": "https://lobby-premium-menu-preview.vercel.app/admin",
-  "immutableUrl": "https://lobby-premium-menu-preview-mr2owb5xi-sadik-ustas-projects.vercel.app",
+  "immutableUrl": "https://lobby-premium-menu-preview-cf4wz8jtm-sadik-ustas-projects.vercel.app",
   "state": "READY",
   "target": "production",
-  "purpose": "Publish approved filter coffee, Churchill and waffle prices.",
+  "purpose": "Publish the animated LOBBY homepage brand mark.",
   "authentication": "Public menu; password-protected administration."
 }

@@ -87,7 +87,7 @@ Başlangıç verisini bilerek yeniden üretmek için `node scripts/import-menu.m
 
 ## Marka ve görseller
 
-Tipografik marka kullanılır; özgün monogram yeniden çizilmedi. Ana sayfada lisanslı bir atmosfer fotoğrafı bulunur; gerçek LOBBY mekânı/müşterileri olarak sunulmaz. Kaynak: [docs/GORSEL_KAYNAKLARI.md](docs/GORSEL_KAYNAKLARI.md). Dijital menüde ürün fotoğrafı eklenmedi.
+Ana sayfada LOBBY Premium Lounge yazısını ve bu sayfa için tasarlanmış hareketli monogramı kullanan bir marka açılışı vardır. Animasyon bir kez oynar ve cihazın azaltılmış hareket ayarına uyar. Dijital menü metin ağırlıklıdır.
 
 Doğrulanmış adres, telefon, çalışma saatleri, sosyal hesaplar ve gerçek mekân fotoğrafları henüz sağlanmadığı için uydurulmadı.
 
