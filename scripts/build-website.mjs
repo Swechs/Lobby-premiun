@@ -10,7 +10,16 @@ fs.cpSync('website/assets',path.join(output,'assets'),{recursive:true});
 fs.copyFileSync('public/favicon.svg',path.join(output,'favicon.svg'));
 const shared=stripTypeScriptTypes(fs.readFileSync('lib/menu.ts','utf8').replace("import initial from '../data/initial-menu.json';",'const initial='+JSON.stringify(menu)+';'));
 const escSource=fs.readFileSync('standalone/ui.mjs','utf8').split(/\r?\n/)[0].replace('export const esc','const esc');
-let client=fs.readFileSync('standalone/menu-client.mjs','utf8').replace(/^import .*;\r?\n/gm,'').replace("setInterval(refresh,30000);document.addEventListener('visibilitychange',refresh);",'');
+const liveMenu=process.argv.includes('--live-menu');
+const refreshSchedule="setInterval(refresh,30000);document.addEventListener('visibilitychange',refresh);";
+let client=fs.readFileSync('standalone/menu-client.mjs','utf8').replace(/^import .*;\r?\n/gm,'');
+if(liveMenu){
+ client=client.replace("fetch('/api/menu',{cache:'no-store'})","fetch('https://lobby-premium-menu-preview.vercel.app/api/menu',{cache:'no-store',credentials:'omit'})")
+  .replace('s.revision!==state.revision','s.revision!==state.revision||s.menu.sourceSha256!==state.menu.sourceSha256')
+  .replace(refreshSchedule,"refresh();document.addEventListener('visibilitychange',refresh);");
+}else{
+ client=client.replace(refreshSchedule,'');
+}
 const script=(shared+'\n'+escSource+'\n'+client).replace(/<\/script/gi,'<\\/script');
 const content=publicShell().replace('<a href="/admin">Menü yönetimi ↗</a>','<a href="/">Ana sayfa ↗</a>');
 const menuPage='<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#F4EEE5"><title>Menü | LOBBY PREMIUM LOUNGE</title><meta name="description" content="LOBBY PREMIUM LOUNGE güncel dijital menüsü."><link rel="icon" href="/favicon.svg"><style>'+fs.readFileSync('app/globals.css','utf8')+'</style></head><body>'+content+'<script id="initial-state" type="application/json">'+JSON.stringify({menu,revision:1}).replace(/</g,'\\u003c')+'</script><script type="module">'+script+'</script></body></html>';

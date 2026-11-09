@@ -43,15 +43,19 @@ Kalıcı veri varsayılan olarak `.sites-runtime/standalone/menu.sqlite` içinde
 
 Başlangıç verisi ve güncel veri yönetim ekranından ayrı JSON dosyaları olarak dışa aktarılır. Sabit kimlikler ve kaynak kategorisi/satırı bilgileri korunur. Yönetici parolası, ortam dosyaları ve gerçek veritabanı Git deposuna dahil değildir.
 
-## Statik yayın / Vercel
+## Vercel yayını ve yönetim paneli
+
+- Yönetim paneli [Vercel üzerindeki `/admin` adresinde](https://lobby-premium-menu-preview.vercel.app/admin) çalışır. İlk yönetici parolası tek kullanımlık kurulum bağlantısıyla belirlenir.
+- `node scripts/build-panel.mjs` Vercel için sunucu fonksiyonunu ve statik varlıkları `.sites-runtime/vercel-panel/` altında hazırlar. `node scripts/test-panel.mjs` önceki derleme çıktısı üzerinden erişim, kayıt ve çakışma akışlarını doğrular.
+- Vercel projesinde özel Blob deposu ve `LOBBY_ADMIN_SETUP_SHA` ortam değişkeni gerekir. Depo, menü değişikliklerini ve yönetici oturumlarını ayrı dosyalarda saklar.
+
+### Başka bir hosting üzerinden menü
 
 ```sh
-node scripts/build-website.mjs
+node scripts/build-website.mjs --live-menu
 ```
 
-Yayın dosyaları `vercel-preview/public/` içine üretilir; Vercel ayarı `vercel-preview/vercel.json` içindedir. Apache uyumlu `.htaccess` de hazırlanır.
-
-**Mevcut Vercel yayını statik ana site ve menüdür.** Korumalı yönetim sunucusu Vercel'e dağıtılmış değildir. Statik çıktı yönetici değişikliklerini kendiliğinden almaz. Kalıcı yönetim için Node 24 ve kalıcı disk sunan hosting kullanılmalıdır.
+Üretilen `vercel-preview/public/menü.html` dosyasını mevcut hostingdeki menü dosyasının yerine yükleyin. `lobbypremiumcafe.com` ve `www.lobbypremiumcafe.com` üzerindeki sayfa, güncel menüyü Vercel API'sinden okur. API bağlantısı kesildiğinde gömülü menü gösterilir. `--live-menu` verilmeden üretilen çıktı çevrimdışı çalışır.
 
 Hosting aktarımı: [docs/WEB_SITE_KURULUM.md](docs/WEB_SITE_KURULUM.md). Güncel yayın ve doğrulama notları: [docs/ANA_SITE_TESLIM.md](docs/ANA_SITE_TESLIM.md).
 
@@ -71,7 +75,7 @@ Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı de
 node scripts/test-all.mjs
 ```
 
-Son doğrulama: **23 test başarılı** — 14 kaynak/veri kontrolü ve 9 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Canlı statik sitede ayrıca mobil görünüm ve gezinme kontrol edildi; gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
+Son doğrulama: **24 test başarılı** — 15 kaynak/veri kontrolü ve 9 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Vercel panelinin oturum ve kayıt akışları ayrıca test edildi. Gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
 
 Başlangıç verisini bilerek yeniden üretmek için `node scripts/import-menu.mjs` kullanılabilir. Bu işlem mevcut veritabanını değiştirmez. Canlı yönetici verisini ilk kaynakla değiştirmeyin; güncel veriyi yönetimden dışa aktararak koruyun.
 
@@ -85,4 +89,4 @@ Doğrulanmış adres, telefon, çalışma saatleri, sosyal hesaplar ve gerçek m
 
 ## Diğer kaynaklar
 
-`app/`, `db/`, `worker/`, `vite.config.ts` ve `.openai/hosting.json` önceki Sites/Vinext uyarlamasını da içerir. Bu uyarlamanın paket kurulumu ve derlemesi bu ortamda doğrulanamadı; mevcut yayın bu framework üzerinden çalışmıyor. Node uygulaması `standalone/` altında, güncel ana sayfa ise `website/` altındadır. İki çalışma biçimi farklı veri kaynakları kullanır; otomatik eşitlenmez.
+`app/`, `db/`, `worker/`, `vite.config.ts` ve `.openai/hosting.json` önceki Sites/Vinext uyarlamasını içerir. Yerel Node uygulaması `standalone/`, Vercel paneli ve güncel ana sayfa `website/` altındadır. Yerel SQLite ve Vercel menü deposu ayrı veri kaynaklarıdır.

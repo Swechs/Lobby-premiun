@@ -1,12 +1,13 @@
 {
   "projectId": "prj_Vr51OonR5o99kPzVIJ0QLtl3NOUM",
   "orgId": "team_2jOTgiQX5BhrqRdoM3FcaMWW",
-  "deploymentId": "dpl_CfeXpo8HxgJvxQJyKcvwSBvsG8e2",
+  "deploymentId": "dpl_7j2A9SKbeJNJ2v6WdmKBcQ5UXTsM",
   "url": "https://lobby-premium-menu-preview.vercel.app",
   "menuUrl": "https://lobby-premium-menu-preview.vercel.app/men%C3%BC",
-  "immutableUrl": "https://lobby-premium-menu-preview-k70bc4ljv-sadik-ustas-projects.vercel.app",
+  "adminUrl": "https://lobby-premium-menu-preview.vercel.app/admin",
+  "immutableUrl": "https://lobby-premium-menu-preview-5blmmidn5-sadik-ustas-projects.vercel.app",
   "state": "READY",
   "target": "production",
-  "purpose": "Remove Karışık Tost and Kaşarlı Tost and move Tavuk Bazlama to Wrap / Quesadilla.",
-  "authentication": "Public: Vercel SSO, password and IP protections are disabled; no expiring share link is used."
+  "purpose": "Password-protected menu administration and persistent live menu data.",
+  "authentication": "Public menu; password-protected administration with a one-time enrollment link."
 }
