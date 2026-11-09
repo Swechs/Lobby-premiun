@@ -3,6 +3,7 @@ import {initialMenu,changesBetween,validateMenu,type Change,type Menu,type MenuS
 
 const originalMenuChecksum='e91d202110894040af5ad2732456442bcdfc85b9364cca574c5b9c7ecfe73a3f';
 const preToastMenuChecksum='55fa35e4f934a191ca97b1d6f8f0e1f1eece4fd7a8097a7bb846bedcd50817d4';
+const prePriceMenuChecksum='0de1e16544c452b23341b4389e6adb37a05958c57d6a7cc1430a0d2514353ba2';
 const legacyMenuChecksums=new Set([
  originalMenuChecksum,
  'de8ae2ce9cf2f02139aa5eeb19806bd533b4143434b62dc4342199f8cdff8aaf'
@@ -10,6 +11,7 @@ const legacyMenuChecksums=new Set([
 const retiredSandwichCategoryId='cat-14';
 const movedToastId='cat-21-item-07';
 const removedToastIds=new Set(['cat-21-item-01','cat-21-item-02']);
+const updatedPriceIds=new Set(['cat-05-item-11','cat-09-item-09','cat-25-item-01','cat-25-item-02']);
 
 function applyMenuRevision(previous:Menu):Menu{
  const needsLegacyUpdates=legacyMenuChecksums.has(previous.sourceSha256);
@@ -21,9 +23,9 @@ function applyMenuRevision(previous:Menu):Menu{
   const saved=previous.products.find(product=>product.id===source.id);
   if(!saved)return source;
   const updateDessertPrice=previous.sourceSha256===originalMenuChecksum&&source.sourceCategoryName==='Tatlılar';
-  const updatePrice=updateDessertPrice||(needsLegacyUpdates&&(source.sourceCategoryName==='Nargileler'||source.id==='cat-11-item-12'));
+  const updatePrice=updatedPriceIds.has(source.id)||updateDessertPrice||(needsLegacyUpdates&&(source.sourceCategoryName==='Nargileler'||source.id==='cat-11-item-12'));
   const price=updatePrice?source.price:saved.price;
-  const isMovedToast=source.id===movedToastId;
+  const isMovedToast=previous.sourceSha256!==prePriceMenuChecksum&&source.id===movedToastId;
   const name=isMovedToast||(needsLegacyUpdates&&source.id==='cat-24-item-03')?source.name:saved.name;
   const description=needsLegacyUpdates&&source.sourceCategoryName==='Soslu Tavuklar'
    ?saved.description.replace(/(?:jülyen|jülien) tavuk\b/giu,'tavuk göğsü')
@@ -50,7 +52,7 @@ export async function readMenu():Promise<MenuState>{
   const row=await env.DB.prepare('SELECT content,revision,updated_at FROM menu_state WHERE id=?').bind('main').first<{content:string;revision:number;updated_at:string}>();
   if(!row)throw new Error('Menü okunamadı.');
   const menu=JSON.parse(row.content) as Menu;
-  if(menu.sourceSha256!==preToastMenuChecksum&&!legacyMenuChecksums.has(menu.sourceSha256))return {menu,revision:row.revision,updatedAt:row.updated_at};
+  if(menu.sourceSha256!==prePriceMenuChecksum&&menu.sourceSha256!==preToastMenuChecksum&&!legacyMenuChecksums.has(menu.sourceSha256))return {menu,revision:row.revision,updatedAt:row.updated_at};
   const updated=applyMenuRevision(menu);
   validateMenu(updated);
   const changes=changesBetween(menu,updated);

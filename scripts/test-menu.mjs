@@ -26,7 +26,8 @@ check('Independent field comparison of all 173 products and 25 categories',()=>{
  }
  assert.deepEqual(fieldDifferences,[]);assert.equal(initial.products.length,173);validateMenu(initial);
 });
-check('Only the four unpriced additions have null prices',()=>{const blank=initial.products.filter(p=>p.price===null).map(p=>p.name);assert.deepEqual(blank,['Filtre Kahve','Churchill','Klasik Waffle','Beyaz Çikolatalı Waffle']);assert.ok(!initial.categories.some(c=>c.id==='cat-14'||c.name==='Sandviçler'));assert.ok(!initial.products.some(p=>/burger|hemingway|kruvasan/i.test(p.name)));});
+const newPrices={'Filtre Kahve':150,'Churchill':140,'Klasik Waffle':320,'Beyaz Çikolatalı Waffle':320};
+check('All products are priced and the four newly approved prices match',()=>{assert.ok(initial.products.every(p=>p.price!==null));for(const [name,price]of Object.entries(newPrices))assert.equal(initial.products.find(p=>p.name===name)?.price,price);assert.ok(!initial.categories.some(c=>c.id==='cat-14'||c.name==='Sandviçler'));assert.ok(!initial.products.some(p=>/burger|hemingway|kruvasan/i.test(p.name)));});
 check('Approved prices, names, and category note',()=>{const prices={'Akdeniz Salata':250,'Karışık Pizza':350,'Kremalı Tavuklu Penne':380,'Penne Arrabbiata':310,'Tavuk Bazlama':350,'Red Bull':150,'Vejetaryen Pizza':290};for(const [name,price]of Object.entries(prices))assert.equal(initial.products.find(p=>p.name===name)?.price,price);assert.ok(initial.products.filter(p=>p.categoryId==='cat-07').every(p=>p.price===180));for(const name of ["Devil's Cake",'Kuzukulağı'])assert.ok(initial.products.some(p=>p.name===name));assert.equal(initial.categories.find(c=>c.name==='Gözlemeler').description,'Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.');});
 check('Turkish case, decomposed Unicode, and ASCII search',()=>{assert.equal(normalizeSearch('SICAK İÇECEKLER'),normalizeSearch('sıcak içecekler'));assert.equal(normalizeSearch('ÇİLEKLİ'),normalizeSearch('çilekli'));assert.equal(normalizeSearch('KUŞBURNU'),normalizeSearch('kusburnu'));assert.equal(normalizeSearch('İ'.normalize('NFD')),normalizeSearch('i'));assert.ok(normalizeSearch(initial.products.find(p=>p.name==='Vejetaryen Pizza').description).includes(normalizeSearch('DİLİMLİ SİYAH ZEYTİN')));});
 check('Null display empty and TL decimal precision',()=>{assert.equal(formatPrice(null),'');assert.equal(formatPrice(180.25),'180,25 TL');assert.equal(formatPrice(180),'180 TL');});
@@ -105,7 +106,19 @@ await asyncCheck('Toast revision keeps product IDs and saved edits while removin
  assert.equal(menu.products.find(p=>p.id===savedToast.id).price,275);
  assert.equal((await readMenu()).revision,revision);
 });
+await asyncCheck('Price revision updates only the four approved products in existing storage',async()=>{
+ const before=clone();
+ before.sourceSha256='0de1e16544c452b23341b4389e6adb37a05958c57d6a7cc1430a0d2514353ba2';
+ for(const item of before.products.filter(p=>Object.hasOwn(newPrices,p.name)))item.price=null;
+ before.products[0].price=123.45;
+ before.products.find(p=>p.id==='cat-21-item-07').name='İşletmenin Tavuk Bazlaması';
+ sqlite.prepare('UPDATE menu_state SET content=? WHERE id=?').run(JSON.stringify(before),'main');
+ const state=await readMenu();
+ assert.deepEqual(changesBetween(before,state.menu).map(({label,field,after})=>[label,field,after]),
+  Object.entries(newPrices).map(([name,price])=>[name,'price',String(price)]));
+ assert.deepEqual(await readMenu(),state);
+});
 sqlite.close();fs.rmSync(dbPath);
-const report={categoryCount:25,productCount:173,nullPrices:4,counts:initial.categories.map(c=>({category:c.name,count:initial.products.filter(p=>p.categoryId===c.id).length})),fieldDifferences,tests};
+const report={categoryCount:25,productCount:173,nullPrices:0,counts:initial.categories.map(c=>({category:c.name,count:initial.products.filter(p=>p.categoryId===c.id).length})),fieldDifferences,tests};
 fs.mkdirSync('docs',{recursive:true});fs.writeFileSync('docs/validation.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({passed:tests.length,failed:0,fieldDifferences:fieldDifferences.length,counts:report.counts}));

@@ -1,13 +1,13 @@
 {
   "projectId": "prj_Vr51OonR5o99kPzVIJ0QLtl3NOUM",
   "orgId": "team_2jOTgiQX5BhrqRdoM3FcaMWW",
-  "deploymentId": "dpl_7j2A9SKbeJNJ2v6WdmKBcQ5UXTsM",
+  "deploymentId": "dpl_2kx4Sjcvtg3MF1ruZ8vQfVesiLfG",
   "url": "https://lobby-premium-menu-preview.vercel.app",
   "menuUrl": "https://lobby-premium-menu-preview.vercel.app/men%C3%BC",
   "adminUrl": "https://lobby-premium-menu-preview.vercel.app/admin",
-  "immutableUrl": "https://lobby-premium-menu-preview-5blmmidn5-sadik-ustas-projects.vercel.app",
+  "immutableUrl": "https://lobby-premium-menu-preview-mr2owb5xi-sadik-ustas-projects.vercel.app",
   "state": "READY",
   "target": "production",
-  "purpose": "Password-protected menu administration and persistent live menu data.",
-  "authentication": "Public menu; password-protected administration with a one-time enrollment link."
+  "purpose": "Publish approved filter coffee, Churchill and waffle prices.",
+  "authentication": "Public menu; password-protected administration."
 }

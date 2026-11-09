@@ -4,7 +4,7 @@
 
 Tek içerik kaynağı: `source/LOBBY_PREMIUM_ANA_MENU.md`. Başlık `LOBBY PREMIUM CAFE` olarak korundu; ziyaretçi markası `LOBBY PREMIUM LOUNGE`.
 
-Ürün adları, açıklamalar, dolu fiyatlar, kategori sırası ve ürün sırası kaynakla alan bazında karşılaştırıldı. **Fark: 0.** Başlangıç veri modeli 25 kategori, 173 ürün ve 4 null fiyat içerir. Burger veya Hemingway ürünü bulunmaz. Aynı isimli ürünleri kategoriler arasında birleştiren işlem yapılmadı.
+Ürün adları, açıklamalar, fiyatlar, kategori sırası ve ürün sırası kaynakla alan bazında karşılaştırıldı. **Fark: 0.** Başlangıç veri modeli 25 kategori ve fiyatı tanımlı 173 ürün içerir. Burger veya Hemingway ürünü bulunmaz. Aynı isimli ürünleri kategoriler arasında birleştiren işlem yapılmadı.
 
 | Kategori | Ürün sayısı |
 | --- | ---: |
@@ -35,7 +35,7 @@ Tek içerik kaynağı: `source/LOBBY_PREMIUM_ANA_MENU.md`. Başlık `LOBBY PREMI
 | Nargileler | 5 |
 | **Toplam** | **173** |
 
-Boş fiyatlar: Klasik Waffle, Beyaz Çikolatalı Waffle, Filtre Kahve ve Churchill. Fiyatlar 0 veya metinle doldurulmadı. Gözlemelerin ortak servis notu kategori açıklamasına aynen aktarıldı.
+Son fiyatlar Filtre Kahve için 150 TL, Churchill için 140 TL ve iki waffle çeşidinin her biri için 320 TL. Gözlemelerin ortak servis notu kategori açıklamasına aynen aktarıldı.
 
 ## Prompt ile Markdown arasındaki açık metin farkı
 
@@ -49,11 +49,11 @@ Diğer onaylı ürün adları/fiyatları kaynağa uyuyor. Smoothie çeşitlerini
 
 ## Çalıştırılan kontroller
 
-**24 kontrol geçti.**
+**26 kontrol geçti.**
 
 - Source checksum and title preserved: başarılı.
 - Independent field comparison of all 173 products and 25 categories: başarılı.
-- Only the four unpriced additions have null prices: başarılı.
+- All products are priced and the four newly approved prices match: başarılı.
 - Approved prices, names, and category note: başarılı.
 - Turkish case, decomposed Unicode, and ASCII search: başarılı.
 - Null display empty and TL decimal precision: başarılı.
@@ -65,6 +65,8 @@ Diğer onaylı ürün adları/fiyatları kaynağa uyuyor. Smoothie çeşitlerini
 - Stale and racing revisions cannot overwrite saved data: başarılı.
 - Only administrator actions mutate data; audit and exports preserved: başarılı.
 - Tost revizyonu mevcut ürün kimliklerini ve kayıtlı yönetici düzenlemelerini korur.
+- Fiyat revizyonu mevcut veritabanında onaylanan dört fiyatı günceller.
+- Ana alan adı için panel bağlantısı yayındaki menüyü sunar ve yönetimi ortak panele yönlendirir.
 - Public menu renders without authentication and exposes exact source data: başarılı.
 - Every admin endpoint denies anonymous access: başarılı.
 - Real scrypt login rejects bad credentials and creates secure server sessions: başarılı.

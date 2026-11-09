@@ -36,6 +36,6 @@ export function parseMenu(text) {
 if(process.argv[1]?.endsWith('import-menu.mjs')) {
  const menu=parseMenu(fs.readFileSync(process.argv[2]||'source/LOBBY_PREMIUM_ANA_MENU.md','utf8'));
  const counts={categories:menu.categories.length,products:menu.products.length,nullPrices:menu.products.filter(p=>p.price===null).length};
- assert.deepEqual(counts,{categories:25,products:173,nullPrices:4});assert.ok(!menu.products.some(p=>/burger|hemingway/i.test(p.name)));
+ assert.deepEqual(counts,{categories:25,products:173,nullPrices:0});assert.ok(!menu.products.some(p=>/burger|hemingway/i.test(p.name)));
  fs.mkdirSync('data',{recursive:true});fs.writeFileSync('data/initial-menu.json',JSON.stringify(menu,null,2)+'\n');console.log(JSON.stringify(counts));
 }

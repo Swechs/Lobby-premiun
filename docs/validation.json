@@ -1,7 +1,7 @@
 {
   "categoryCount": 25,
   "productCount": 173,
-  "nullPrices": 4,
+  "nullPrices": 0,
   "counts": [
     {
       "category": "Türk Kahveleri",
@@ -115,7 +115,7 @@
       "result": "PASS"
     },
     {
-      "test": "Only the four unpriced additions have null prices",
+      "test": "All products are priced and the four newly approved prices match",
       "result": "PASS"
     },
     {
@@ -164,6 +164,10 @@
     },
     {
       "test": "Toast revision keeps product IDs and saved edits while removing and moving the requested rows",
+      "result": "PASS"
+    },
+    {
+      "test": "Price revision updates only the four approved products in existing storage",
       "result": "PASS"
     }
   ]

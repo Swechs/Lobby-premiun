@@ -70,7 +70,7 @@ Ana alan adı `lobbypremiumcafe.com` ve menü yolu `/menü` doğrulandı. Vercel
 Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı değiştirilmedi. İlk veri `data/initial-menu.json` içinde bulunur.
 
 - 25 kategori, 173 ürün.
-- Dokuz tatlının fiyatı girildi. Waffle çeşitleri, Filtre Kahve ve Churchill için fiyat alanları boş.
+- Tüm ürünler fiyatlandırıldı. Filtre Kahve 150 TL, Churchill 140 TL ve iki waffle çeşidi de 320 TL.
 - Burgerler ve Hemingway yok.
 - Kaynakla ürün adı, açıklama ve dolu fiyat karşılaştırması: 0 fark.
 - Türkçe karakterlere uygun arama, kategori gezinmesi ve boş fiyat gösterimi.
@@ -79,7 +79,7 @@ Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı de
 node scripts/test-all.mjs
 ```
 
-Son doğrulama: **25 test başarılı** — 15 kaynak/veri kontrolü ve 10 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Vercel panelinin oturum ve kayıt akışları ayrıca test edildi. Gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
+Son doğrulama: **26 test başarılı** — 16 kaynak/veri kontrolü ve 10 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Vercel panelinin oturum ve kayıt akışları ayrıca test edildi. Gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
 
 Başlangıç verisini bilerek yeniden üretmek için `node scripts/import-menu.mjs` kullanılabilir. Bu işlem mevcut veritabanını değiştirmez. Canlı yönetici verisini ilk kaynakla değiştirmeyin; güncel veriyi yönetimden dışa aktararak koruyun.
 

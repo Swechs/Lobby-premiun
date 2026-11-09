@@ -3,7 +3,7 @@
 ## Doğrulama ve kaynak notları
 
 - 9 Kasım 2026 menü güncellemesi. Güncel sayım **25 kategori, 173 ürün**.
-- Tatlı fiyatları gönderilen listeden ve 270 TL teyidinden işlendi. Fiyatı henüz belirtilmeyen yeni ürünlerde fiyat alanı boş.
+- Tatlı fiyatları gönderilen listeden ve 270 TL teyidinden işlendi. Filtre Kahve, Churchill ve iki waffle çeşidinin fiyatı son bildirime göre eklendi.
 - Burgerler ve Hemingway dahil edilmemiştir.
 - Vejetaryen Pizza, son gönderilen listede bulunduğu için 290 TL ve kaynak açıklamasıyla korunmuştur.
 - Ürün adları, dolu fiyatlar ve açıklamalar son gönderilen listeden aynen aktarılmıştır. Açıklaması olmayan ürünlere açıklama eklenmemiştir.
@@ -100,7 +100,7 @@
 | White Chocolate Mocha | 170 TL |  |
 | Caramel Macchiato | 170 TL |  |
 | Spanish Latte | 170 TL |  |
-| Filtre Kahve |  |  |
+| Filtre Kahve | 150 TL |  |
 
 ## Soğuk Kahveler
 
@@ -159,7 +159,7 @@
 | Çilekli Mojito | 200 TL |  |
 | Cool Lime | 200 TL |  |
 | Kuzukulağı | 200 TL |  |
-| Churchill |  |  |
+| Churchill | 140 TL |  |
 
 ## Milkshake
 
@@ -238,8 +238,8 @@
 
 | Ürün | Fiyat | Açıklama |
 | --- | --- | --- |
-| Klasik Waffle |  |  |
-| Beyaz Çikolatalı Waffle |  |  |
+| Klasik Waffle | 320 TL |  |
+| Beyaz Çikolatalı Waffle | 320 TL |  |
 
 ## Atıştırmalıklar
 
