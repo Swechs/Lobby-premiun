@@ -6,8 +6,9 @@ import {Readable} from 'node:stream';
 const dir=fs.mkdtempSync(path.resolve('.sites-runtime/http-tests-'));process.env.LOBBY_DATA_DIR=dir;process.env.PUBLIC_ORIGIN='https://menu.example';process.env.NODE_ENV='production';
 const password=crypto.randomBytes(24).toString('hex'),salt=crypto.randomBytes(32).toString('hex');process.env.ADMIN_PASSWORD_HASH=JSON.stringify({salt,hash:crypto.scryptSync(password,salt,64).toString('hex')});
 const {handle,closeDatabase}=await import('../standalone/server.mjs');
+let handler=handle;
 const tests=[];let cookie='';
-async function invoke(url,{method='GET',body,headers={},authenticated=false,ip='test'}={}){const req=Readable.from(body===undefined?[]:[Buffer.from(JSON.stringify(body))]);Object.assign(req,{method,url,headers:{...(body===undefined?{}:{'content-type':'application/json'}),...(authenticated?{cookie}:{}),...headers},socket:{remoteAddress:ip}});let result;const res={writeHead(status,headers){result={status,headers};},end(body){result.body=String(body);try{result.json=JSON.parse(result.body);}catch{}}};await handle(req,res);return result;}
+async function invoke(url,{method='GET',body,headers={},authenticated=false,ip='test'}={}){const req=Readable.from(body===undefined?[]:[Buffer.from(JSON.stringify(body))]);Object.assign(req,{method,url,headers:{...(body===undefined?{}:{'content-type':'application/json'}),...(authenticated?{cookie}:{}),...headers},socket:{remoteAddress:ip}});let result;const res={writeHead(status,headers){result={status,headers};},end(body){result.body=String(body);try{result.json=JSON.parse(result.body);}catch{}}};await handler(req,res);return result;}
 async function check(name,fn){await fn();tests.push({test:name,result:'PASS'});}
 await check('Public menu renders without authentication and exposes exact source data',async()=>{const r=await invoke('/');assert.equal(r.status,200);assert.ok(r.body.includes('LOBBY PREMIUM LOUNGE'));const a=await invoke('/api/menu');assert.equal(a.json.menu.products.length,173);assert.equal(a.json.menu.categories.length,25);assert.equal(a.json.menu.products.filter(p=>p.price===null).length,4);assert.ok(r.headers['Content-Security-Policy'].includes("frame-ancestors 'none'"));});
 await check('Homepage and UTF-8 menu routes are separate and remain public',async()=>{const home=await invoke('/');assert.equal(home.status,200);assert.ok(home.body.includes('Çıkışta'));assert.ok(home.body.includes('href="/menü"'));for(const route of ['/menü','/men%C3%BC','/men%C3%BC/']){const r=await invoke(route);assert.equal(r.status,200);assert.ok(r.body.includes('id="menu-search"'));assert.ok(r.body.includes('id="initial-state"'));}const alias=await invoke('/menu');assert.equal(alias.status,308);assert.equal(alias.headers.Location,'/men%C3%BC');for(const asset of ['/assets/site.css','/assets/site.js','/assets/images/friends-games.avif'])assert.equal((await invoke(asset)).status,200);});
@@ -18,5 +19,33 @@ await check('Authorized sessions cannot perform cross-origin or invalid writes',
 await check('Initial and current exports remain distinct and current revision prevents lost updates',async()=>{const a=await invoke('/api/admin/export?type=initial',{authenticated:true}),b=await invoke('/api/admin/export',{authenticated:true});assert.equal(a.json.menu.products[0].price,90);assert.equal(b.json.menu.products[0].price,null);const r=await invoke('/api/admin/menu',{method:'PUT',body:{menu:a.json.menu,revision:1},authenticated:true,headers:{origin:'https://menu.example','x-menu-action':'save'}});assert.equal(r.status,409);assert.ok(b.headers['Content-Disposition'].includes('current.json'));});
 await check('Login attempts are rate limited',async()=>{for(let i=0;i<10;i++)assert.equal((await invoke('/auth/login',{method:'POST',body:{password:'wrong'},headers:{origin:'https://menu.example','x-menu-action':'save'},ip:'brute-force-test'})).status,401);assert.equal((await invoke('/auth/login',{method:'POST',body:{password},headers:{origin:'https://menu.example','x-menu-action':'save'},ip:'brute-force-test'})).status,429);});
 await check('Logout revokes the session server-side',async()=>{assert.equal((await invoke('/auth/logout',{method:'POST',authenticated:true,headers:{origin:'https://attacker.example'}})).status,403);assert.equal((await invoke('/auth/logout',{method:'POST',authenticated:true,headers:{origin:'https://menu.example'}})).status,303);assert.equal((await invoke('/api/admin/menu',{authenticated:true})).status,403);});
+await check('Hosted menu bridge serves live edits on existing routes and delegates administration',async()=>{
+ const originalFetch=globalThis.fetch,hosted=(await invoke('/api/menu')).json;
+ hosted.revision=12;
+ hosted.menu.products[0].price=175.25;
+ hosted.menu.products[0].name='Yayındaki ürün';
+ process.env.LOBBY_USE_HOSTED_MENU='true';
+ const bridge=await import('../standalone/server.mjs?test=hosted-menu');
+ handler=bridge.handle;
+ try{
+  globalThis.fetch=async url=>{
+   assert.equal(url,'https://lobby-premium-menu-preview.vercel.app/api/menu');
+   return Response.json(hosted);
+  };
+  assert.equal((await invoke('/api/menu')).json.menu.products[0].price,175.25);
+  assert.match((await invoke('/men%C3%BC')).body,/Yayındaki ürün/);
+  const admin=await invoke('/admin');
+  assert.equal(admin.status,302);
+  assert.equal(admin.headers.Location,'https://lobby-premium-menu-preview.vercel.app/admin');
+  assert.equal((await invoke('/api/admin/menu',{method:'PUT'})).status,409);
+  globalThis.fetch=async()=>{throw new Error('temporary network failure');};
+  assert.equal((await invoke('/api/menu')).json.revision,12);
+ }finally{
+  globalThis.fetch=originalFetch;
+  delete process.env.LOBBY_USE_HOSTED_MENU;
+  bridge.closeDatabase();
+  handler=handle;
+ }
+});
 closeDatabase();for(const file of fs.readdirSync(dir))fs.unlinkSync(path.join(dir,file));fs.rmdirSync(dir);delete process.env.ADMIN_PASSWORD_HASH;
 fs.writeFileSync('docs/standalone-validation.json',JSON.stringify({passed:tests.length,failed:0,tests,method:'Direct Node request-handler execution; browser and socket transport not verified.'},null,2)+'\n');console.log(JSON.stringify({passed:tests.length,failed:0}));

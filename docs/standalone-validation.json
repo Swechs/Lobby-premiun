@@ -1,5 +1,5 @@
 {
-  "passed": 9,
+  "passed": 10,
   "failed": 0,
   "tests": [
     {
@@ -36,6 +36,10 @@
     },
     {
       "test": "Logout revokes the session server-side",
+      "result": "PASS"
+    },
+    {
+      "test": "Hosted menu bridge serves live edits on existing routes and delegates administration",
       "result": "PASS"
     }
   ],

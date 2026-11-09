@@ -49,17 +49,21 @@ Başlangıç verisi ve güncel veri yönetim ekranından ayrı JSON dosyaları o
 - `node scripts/build-panel.mjs` Vercel için sunucu fonksiyonunu ve statik varlıkları `.sites-runtime/vercel-panel/` altında hazırlar. `node scripts/test-panel.mjs` önceki derleme çıktısı üzerinden erişim, kayıt ve çakışma akışlarını doğrular.
 - Vercel projesinde özel Blob deposu ve `LOBBY_ADMIN_SETUP_SHA` ortam değişkeni gerekir. Depo, menü değişikliklerini ve yönetici oturumlarını ayrı dosyalarda saklar.
 
-### Başka bir hosting üzerinden menü
+### lobbypremiumcafe.com bağlantısı
+
+Ana alan adı Node uygulamasını çalıştırır. Bu sunucuda güncel uygulama dosyalarını yükleyin, mevcut başlatma ortamına `LOBBY_USE_HOSTED_MENU=true` ekleyin ve Node sürecini yeniden başlatın. Menü ve ana sayfa canlı veriyi Vercel'den okur. `/admin`, ortak yönetim panelini açar. Mevcut alan adı ve menü yolu korunur.
+
+### Statik hosting çıktısı
 
 ```sh
 node scripts/build-website.mjs --live-menu
 ```
 
-Üretilen `vercel-preview/public/menü.html` dosyasını mevcut hostingdeki menü dosyasının yerine yükleyin. `lobbypremiumcafe.com` ve `www.lobbypremiumcafe.com` üzerindeki sayfa, güncel menüyü Vercel API'sinden okur. API bağlantısı kesildiğinde gömülü menü gösterilir. `--live-menu` verilmeden üretilen çıktı çevrimdışı çalışır.
+Üretilen `vercel-preview/public/menü.html` statik sunucular içindir. `--live-menu` seçeneği Vercel API'sine bağlanır ve API erişilemezse gömülü menüyü gösterir. Ana alan adının Node sunucusunda yukarıdaki bağlantıyı kullanın.
 
 Hosting aktarımı: [docs/WEB_SITE_KURULUM.md](docs/WEB_SITE_KURULUM.md). Güncel yayın ve doğrulama notları: [docs/ANA_SITE_TESLIM.md](docs/ANA_SITE_TESLIM.md).
 
-Gerçek alan adı henüz bağlanmadı. Basılacak QR, son genel menü URL'si kesinleşip doğrulandıktan sonra `scripts/generate-qr.py` ile SVG ve PNG olarak üretilebilir. Gerçek telefonla QR okuma testi henüz yapılmadı.
+Ana alan adı `lobbypremiumcafe.com` ve menü yolu `/menü` doğrulandı. Vercel panelini bu alan adına bağlamak için Node sunucusunun güncellenmesi gerekir. QR üretimi için `scripts/generate-qr.py` kullanılabilir.
 
 ## Menü kaynağı ve doğrulama
 
@@ -75,7 +79,7 @@ Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı de
 node scripts/test-all.mjs
 ```
 
-Son doğrulama: **24 test başarılı** — 15 kaynak/veri kontrolü ve 9 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Vercel panelinin oturum ve kayıt akışları ayrıca test edildi. Gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
+Son doğrulama: **25 test başarılı** — 15 kaynak/veri kontrolü ve 10 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Vercel panelinin oturum ve kayıt akışları ayrıca test edildi. Gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
 
 Başlangıç verisini bilerek yeniden üretmek için `node scripts/import-menu.mjs` kullanılabilir. Bu işlem mevcut veritabanını değiştirmez. Canlı yönetici verisini ilk kaynakla değiştirmeyin; güncel veriyi yönetimden dışa aktararak koruyun.
 

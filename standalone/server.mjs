@@ -24,6 +24,24 @@ const storeSource=stripTypeScriptTypes(fs.readFileSync(path.join(root,'lib/store
 const {readMenu,saveMenu}=await import(moduleUrl(storeSource));
 const host=process.env.HOST||'127.0.0.1',port=Number(process.env.PORT||4317),origin=process.env.PUBLIC_ORIGIN||`http://127.0.0.1:${port}`;
 const parsedOrigin=new URL(origin);if(process.env.NODE_ENV==='production'&&parsedOrigin.protocol!=='https:')throw new Error('Production requires an HTTPS PUBLIC_ORIGIN.');
+const hostedMenuOrigin='https://lobby-premium-menu-preview.vercel.app';
+const usesHostedMenu=process.env.LOBBY_USE_HOSTED_MENU==='true';
+let lastHostedMenu;
+async function readPublicMenu(){
+ if(!usesHostedMenu)return readMenu();
+ try{
+  const response=await fetch(hostedMenuOrigin+'/api/menu',{signal:AbortSignal.timeout(4500)});
+  if(!response.ok)throw new Error('Hosted menu unavailable');
+  const state=await response.json();
+  if(!Number.isSafeInteger(state.revision)||!state.menu?.categories?.length||!Array.isArray(state.menu.products)){
+   throw new Error('Hosted menu response invalid');
+  }
+  lastHostedMenu=state;
+  return state;
+ }catch{
+  return lastHostedMenu??await readMenu();
+ }
+}
 const secure=parsedOrigin.protocol==='https:',cookie=(token,maxAge)=>`lobby_admin=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${maxAge}${secure?'; Secure':''}`;
 const hash=token=>crypto.createHash('sha256').update(token).digest('hex');
 function session(req){const token=String(req.headers.cookie||'').split(';').map(s=>s.trim()).find(s=>s.startsWith('lobby_admin='))?.slice(12);if(!token||!/^[a-f0-9]{64}$/.test(token))return null;return database.prepare('SELECT token_hash FROM admin_sessions WHERE token_hash=? AND expires_at>?').get(hash(token),Date.now());}
@@ -40,10 +58,14 @@ export async function handle(req,res){try{
  const url=new URL(req.url,origin),pathname=decodeURIComponent(url.pathname);
  if(req.method==='GET'&&assets[pathname]){const [file,type]=assets[pathname];return send(res,200,fs.readFileSync(path.join(root,file)),type);}
  if(req.method==='GET'&&pathname==='/shared.mjs')return send(res,200,sharedSource,'text/javascript; charset=utf-8');
- if(req.method==='GET'&&pathname==='/')return send(res,200,renderHomeDocument((await readMenu()).menu),'text/html; charset=utf-8');
+ if(req.method==='GET'&&pathname==='/')return send(res,200,renderHomeDocument((await readPublicMenu()).menu),'text/html; charset=utf-8');
  if(req.method==='GET'&&['/menu','/menu/'].includes(pathname))return send(res,308,'','text/plain',{Location:'/men%C3%BC'+url.search});
- if(req.method==='GET'&&['/menü','/menü/'].includes(pathname))return send(res,200,html(publicShell(),await readMenu(),'menu-client.mjs'),'text/html; charset=utf-8');
- if(req.method==='GET'&&pathname==='/api/menu')return send(res,200,await readMenu());
+ if(req.method==='GET'&&['/menü','/menü/'].includes(pathname))return send(res,200,html(publicShell(),await readPublicMenu(),'menu-client.mjs'),'text/html; charset=utf-8');
+ if(req.method==='GET'&&pathname==='/api/menu')return send(res,200,await readPublicMenu());
+ if(usesHostedMenu){
+  if(req.method==='GET'&&pathname==='/admin')return send(res,302,'','text/plain',{Location:hostedMenuOrigin+'/admin'});
+  if(pathname.startsWith('/api/admin/')||pathname.startsWith('/auth/'))return send(res,409,{error:'Menü yönetimi yayın paneline taşındı.'});
+ }
  if(req.method==='GET'&&pathname==='/admin')return send(res,200,session(req)?html(adminShell(),await readMenu(),'admin-client.mjs',true):loginPage(passwordConfig()?'':'Yönetici parolası henüz sunucuda tanımlanmamış.'),'text/html; charset=utf-8');
  if(pathname==='/auth/login'&&req.method==='POST'){
   if(req.headers.origin!==origin||req.headers['x-menu-action']!=='save')return send(res,403,{error:'İstek kaynağı doğrulanamadı.'});

@@ -1,6 +1,6 @@
 # LOBBY ana site ve dijital menü
 
-Ana site `/`, dijital menü `/menü` adresindedir. `/menu` İngilizce karakterli kısa yoludur. Satın alınacak alan adı henüz yapılandırılmadı; tüm site bağlantıları göreli hazırlanmıştır. Kullanıcının örnek alan adı yayımlanmış veya satın alınmış kabul edilmemiştir.
+Ana site `lobbypremiumcafe.com`, dijital menü `/menü` adresindedir. `/menu` aynı menüye yönlenir. Ana alan adı ayrı bir Node sunucusundan, yönetim paneli Vercel'den yayınlanır.
 
 ## İçerik ve tasarım
 
@@ -22,6 +22,14 @@ Mevcut `standalone/server.mjs` ana siteyi `/`, kalıcı veritabanındaki menüy�
 
 Node.js 24 ve kalıcı disk gerekir. `node standalone/setup-admin.mjs`, ardından `node standalone/server.mjs`. Yerel adres terminalde yazdırılır. Üretim yapılandırması için `docs/YAYIN.md` içindeki Node adımlarını kullanın.
 
-## Vercel önizlemesi
+### Ana alan adını Vercel paneline bağlama
 
-Mevcut `lobby-premium-menu-preview` projesi kullanılır; yeni proje veya alan adı oluşturulmaz. Herkese açık erişim korunur. `vercel-preview/vercel.json` yalnızca `public` klasörünü yayınlar. `.vercel`, `deployment.json`, yönetici oturumları ve yerel veritabanı yayın dosyası değildir.
+1. `LOBBY_Menu_Hosting.zip` içindeki uygulama dosyalarını mevcut Node projesinin köküne yükleyin.
+2. Node sürecinin ortamına `LOBBY_USE_HOSTED_MENU=true` ekleyin. Mevcut `PUBLIC_ORIGIN`, port ve veri dizini ayarlarıyla uygulamayı yeniden başlatın.
+3. `/api/menu` çıktısında güncel ürün sayısını kontrol edin. `/admin` adresinin Vercel paneline yönlendiğini doğrulayın.
+
+Uygulama menüyü sunucu üzerinden okur. Tarayıcı aynı alan adındaki `/api/menu` adresini kullanır. Vercel'e geçici erişim kesintisinde süreç son başarılı menüyü, ilk istek sırasında erişim kesintisinde ise yerel menüyü sunar.
+
+## Vercel yayını
+
+Mevcut `lobby-premium-menu-preview` projesi kullanılır. Genel menü ve şifreyle korunan yönetim panelinin yayın paketi `node scripts/build-panel.mjs` ile hazırlanır. Kurulum bağlantısı işletmenin ilk yönetici parolasını belirlemek için bir kez kullanılır.

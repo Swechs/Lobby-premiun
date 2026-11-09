@@ -15,7 +15,6 @@ const refreshSchedule="setInterval(refresh,30000);document.addEventListener('vis
 let client=fs.readFileSync('standalone/menu-client.mjs','utf8').replace(/^import .*;\r?\n/gm,'');
 if(liveMenu){
  client=client.replace("fetch('/api/menu',{cache:'no-store'})","fetch('https://lobby-premium-menu-preview.vercel.app/api/menu',{cache:'no-store',credentials:'omit'})")
-  .replace('s.revision!==state.revision','s.revision!==state.revision||s.menu.sourceSha256!==state.menu.sourceSha256')
   .replace(refreshSchedule,"refresh();document.addEventListener('visibilitychange',refresh);");
 }else{
  client=client.replace(refreshSchedule,'');
