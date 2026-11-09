@@ -61,8 +61,8 @@ Gerçek alan adı henüz bağlanmadı. Basılacak QR, son genel menü URL'si kes
 
 Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı değiştirilmedi. İlk veri `data/initial-menu.json` içinde bulunur.
 
-- 23 kategori, 158 ürün.
-- 9 tatlı ve 3 kruvasan sandviç: toplam 12 `null` fiyat.
+- 24 kategori, 162 ürün.
+- Dokuz tatlının fiyatı girildi. Üç kruvasan sandviçte fiyat boş.
 - Burgerler ve Hemingway yok.
 - Kaynakla ürün adı, açıklama ve dolu fiyat karşılaştırması: 0 fark.
 - Türkçe karakterlere uygun arama, kategori gezinmesi ve boş fiyat gösterimi.
@@ -71,7 +71,7 @@ Tek menü kaynağı `source/LOBBY_PREMIUM_ANA_MENU.md`; dosyanın başlığı de
 node scripts/test-all.mjs
 ```
 
-Son doğrulama: **22 test başarılı** — 13 kaynak/veri kontrolü ve 9 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Canlı statik sitede ayrıca mobil görünüm ve gezinme kontrol edildi; gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
+Son doğrulama: **23 test başarılı** — 14 kaynak/veri kontrolü ve 9 Node sunucusu/yetkilendirme/yönlendirme kontrolü. Canlı statik sitede ayrıca mobil görünüm ve gezinme kontrol edildi; gerçek telefon ve kapsamlı ekran okuyucu testi henüz yapılmadı.
 
 Başlangıç verisini bilerek yeniden üretmek için `node scripts/import-menu.mjs` kullanılabilir. Bu işlem mevcut veritabanını değiştirmez. Canlı yönetici verisini ilk kaynakla değiştirmeyin; güncel veriyi yönetimden dışa aktararak koruyun.
 

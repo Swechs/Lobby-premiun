@@ -1,7 +1,7 @@
 {
-  "categoryCount": 23,
-  "productCount": 158,
-  "nullPrices": 12,
+  "categoryCount": 24,
+  "productCount": 162,
+  "nullPrices": 3,
   "counts": [
     {
       "category": "Türk Kahveleri",
@@ -94,6 +94,10 @@
     {
       "category": "Wrap / Quesadilla",
       "count": 2
+    },
+    {
+      "category": "Nargileler",
+      "count": 4
     }
   ],
   "fieldDifferences": [],
@@ -103,11 +107,11 @@
       "result": "PASS"
     },
     {
-      "test": "Independent field comparison of all 158 products and 23 categories",
+      "test": "Independent field comparison of all 162 products and 24 categories",
       "result": "PASS"
     },
     {
-      "test": "Exactly 9 desserts and 3 sandwiches have null prices",
+      "test": "Only the three sandwiches have null prices",
       "result": "PASS"
     },
     {
@@ -148,6 +152,10 @@
     },
     {
       "test": "Only administrator actions mutate data; audit and exports preserved",
+      "result": "PASS"
+    },
+    {
+      "test": "Existing saved menu receives the November update once and keeps prior edits",
       "result": "PASS"
     }
   ]

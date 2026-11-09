@@ -23,7 +23,7 @@ export function changesBetween(before:Menu,after:Menu):Change[]{
 export function validateMenu(input:unknown):asserts input is Menu{
  const m=input as Menu;
  if(!m||m.schemaVersion!==1||m.sourceTitle!==initialMenu.sourceTitle||m.sourceSha256!==initialMenu.sourceSha256||!Array.isArray(m.categories)||!Array.isArray(m.products))throw new Error('Menü yapısı geçersiz.');
- if(m.categories.length!==23||m.products.length!==158)throw new Error('Kategori veya ürün sayısı değiştirilemez.');
+ if(m.categories.length!==initialMenu.categories.length||m.products.length!==initialMenu.products.length)throw new Error('Kategori veya ürün sayısı değiştirilemez.');
  const text=(s:unknown,max:number,empty=false)=>typeof s==='string'&&s.length<=max&&(empty||s.trim().length>0);
  const sort=(s:unknown)=>Number.isInteger(s)&&Number(s)>=0&&Number(s)<=100000;
  for(const kind of ['categories','products'] as const){

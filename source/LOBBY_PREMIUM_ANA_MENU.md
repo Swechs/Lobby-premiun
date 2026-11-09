@@ -2,8 +2,8 @@
 
 ## Doğrulama ve kaynak notları
 
-- Son gönderilen güncel çalışma listesinden tek tek sayım: **23 kategori, 158 ürün**. Önceki 22 kategori / 157 ürün iddiası bu listeyle uyuşmuyor. Kaynak kategoriler birleştirilmeden korunmuştur.
-- 9 tatlı ve 3 kruvasan sandviçin fiyat hücreleri bilerek boş bırakılmıştır.
+- 9 Kasım 2026 güncellemesiyle Nargileler eklendi. Güncel sayım **24 kategori, 162 ürün**.
+- Tatlı fiyatları gönderilen listeden ve 270 TL teyidinden işlendi. Üç kruvasan sandviçin fiyat hücreleri boş bırakıldı.
 - Burgerler ve Hemingway dahil edilmemiştir.
 - Vejetaryen Pizza, son gönderilen listede bulunduğu için 290 TL ve kaynak açıklamasıyla korunmuştur.
 - Ürün adları, dolu fiyatlar ve açıklamalar son gönderilen listeden aynen aktarılmıştır. Açıklaması olmayan ürünlere açıklama eklenmemiştir.
@@ -36,7 +36,8 @@
 | Tostlar | 7 |
 | Gözlemeler | 5 |
 | Wrap / Quesadilla | 2 |
-| **Toplam** | **158** |
+| Nargileler | 4 |
+| **Toplam** | **162** |
 
 ## Türk Kahveleri
 
@@ -204,15 +205,15 @@
 
 | Ürün | Fiyat | Açıklama |
 | --- | --- | --- |
-| Magnolia Çilek |  |  |
-| Magnolia Oreo |  |  |
-| Magnolia Lotus |  |  |
-| Tiramisu |  |  |
-| San Sebastian |  |  |
-| Frambuazlı Cheesecake |  |  |
-| Budapeşte |  |  |
-| Mozaik |  |  |
-| Devil's Cake |  |  |
+| Magnolia Çilek | 270 TL |  |
+| Magnolia Oreo | 280 TL |  |
+| Magnolia Lotus | 280 TL |  |
+| Tiramisu | 280 TL |  |
+| San Sebastian | 290 TL |  |
+| Frambuazlı Cheesecake | 270 TL |  |
+| Budapeşte | 270 TL |  |
+| Mozaik | 270 TL |  |
+| Devil's Cake | 280 TL |  |
 
 ## Sandviçler
 
@@ -312,3 +313,12 @@ Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.
 | --- | --- | --- |
 | Tavuk Wrap | 350 TL | 150 gram tavuk, biber, mantar, mısır, kaşar peyniri; 2 çeşit sos ve patates kızartması eşliğinde. |
 | Tavuk Quesadilla | 370 TL | 150 gram tavuk, kaşar peyniri, biber, mantar; 2 çeşit sos ve patates kızartması eşliğinde. |
+
+## Nargileler
+
+| Ürün | Fiyat | Açıklama |
+| --- | --- | --- |
+| Standart | 550 TL |  |
+| Dark Leaf | 600 TL |  |
+| Premium | 650 TL |  |
+| Cigar Leaf | 750 TL |  |

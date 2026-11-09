@@ -4,7 +4,7 @@
 
 Tek içerik kaynağı: `source/LOBBY_PREMIUM_ANA_MENU.md`. Başlık `LOBBY PREMIUM CAFE` olarak korundu; ziyaretçi markası `LOBBY PREMIUM LOUNGE`.
 
-Ürün adları, açıklamalar, dolu fiyatlar, kategori sırası ve ürün sırası kaynakla alan bazında karşılaştırıldı. **Fark: 0.** Başlangıç veri modeli 23 kategori, 158 ürün ve 12 null fiyat içerir. Burger veya Hemingway ürünü bulunmaz. Aynı isimli ürünleri kategoriler arasında birleştiren işlem yapılmadı.
+Ürün adları, açıklamalar, dolu fiyatlar, kategori sırası ve ürün sırası kaynakla alan bazında karşılaştırıldı. **Fark: 0.** Başlangıç veri modeli 24 kategori, 162 ürün ve 3 null fiyat içerir. Burger veya Hemingway ürünü bulunmaz. Aynı isimli ürünleri kategoriler arasında birleştiren işlem yapılmadı.
 
 | Kategori | Ürün sayısı |
 | --- | ---: |
@@ -31,9 +31,10 @@ Tek içerik kaynağı: `source/LOBBY_PREMIUM_ANA_MENU.md`. Başlık `LOBBY PREMI
 | Tostlar | 7 |
 | Gözlemeler | 5 |
 | Wrap / Quesadilla | 2 |
-| **Toplam** | **158** |
+| Nargileler | 4 |
+| **Toplam** | **162** |
 
-Boş fiyatlar: 9 Tatlılar + 3 Sandviçler. Üç sandviç kruvasandır. Fiyatlar 0 veya metinle doldurulmadı. Gözlemelerin ortak servis notu kategori açıklamasına aynen aktarıldı.
+Boş fiyatlar: 3 Sandviçler. Üç sandviç kruvasandır. Fiyatlar 0 veya metinle doldurulmadı. Gözlemelerin ortak servis notu kategori açıklamasına aynen aktarıldı.
 
 ## Prompt ile Markdown arasındaki açık metin farkı
 
@@ -47,11 +48,11 @@ Diğer onaylı ürün adları/fiyatları kaynağa uyuyor. Smoothie çeşitlerini
 
 ## Çalıştırılan kontroller
 
-**21 kontrol geçti; 0 başarısız.**
+**23 kontrol geçti.**
 
 - Source checksum and title preserved: başarılı.
-- Independent field comparison of all 158 products and 23 categories: başarılı.
-- Exactly 9 desserts and 3 sandwiches have null prices: başarılı.
+- Independent field comparison of all 162 products and 24 categories: başarılı.
+- Only the three sandwiches have null prices: başarılı.
 - Approved prices, names, and category note: başarılı.
 - Turkish case, decomposed Unicode, and ASCII search: başarılı.
 - Null display empty and TL decimal precision: başarılı.
