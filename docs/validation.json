@@ -1,6 +1,6 @@
 {
   "categoryCount": 25,
-  "productCount": 175,
+  "productCount": 173,
   "nullPrices": 4,
   "counts": [
     {
@@ -89,7 +89,7 @@
     },
     {
       "category": "Tostlar",
-      "count": 7
+      "count": 4
     },
     {
       "category": "Gözlemeler",
@@ -97,7 +97,7 @@
     },
     {
       "category": "Wrap / Quesadilla",
-      "count": 2
+      "count": 3
     },
     {
       "category": "Nargileler",
@@ -111,7 +111,7 @@
       "result": "PASS"
     },
     {
-      "test": "Independent field comparison of all 175 products and 25 categories",
+      "test": "Independent field comparison of all 173 products and 25 categories",
       "result": "PASS"
     },
     {
@@ -160,6 +160,10 @@
     },
     {
       "test": "Existing saved menu receives the November update once and keeps prior edits",
+      "result": "PASS"
+    },
+    {
+      "test": "Toast revision keeps product IDs and saved edits while removing and moving the requested rows",
       "result": "PASS"
     }
   ]

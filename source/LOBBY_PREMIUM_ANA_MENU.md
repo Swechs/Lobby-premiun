@@ -2,7 +2,7 @@
 
 ## Doğrulama ve kaynak notları
 
-- 9 Kasım 2026 menü güncellemesi. Güncel sayım **25 kategori, 175 ürün**.
+- 9 Kasım 2026 menü güncellemesi. Güncel sayım **25 kategori, 173 ürün**.
 - Tatlı fiyatları gönderilen listeden ve 270 TL teyidinden işlendi. Fiyatı henüz belirtilmeyen yeni ürünlerde fiyat alanı boş.
 - Burgerler ve Hemingway dahil edilmemiştir.
 - Vejetaryen Pizza, son gönderilen listede bulunduğu için 290 TL ve kaynak açıklamasıyla korunmuştur.
@@ -34,11 +34,11 @@
 | Pizzalar | 6 |
 | Salatalar | 4 |
 | Makarnalar | 6 |
-| Tostlar | 7 |
+| Tostlar | 4 |
 | Gözlemeler | 5 |
-| Wrap / Quesadilla | 2 |
+| Wrap / Quesadilla | 3 |
 | Nargileler | 5 |
-| **Toplam** | **175** |
+| **Toplam** | **173** |
 
 ## Türk Kahveleri
 
@@ -305,13 +305,10 @@
 
 | Ürün | Fiyat | Açıklama |
 | --- | --- | --- |
-| Karışık Tost | 260 TL | Sucuk, kaşar; yanında patates kızartması, domates ve salatalık. |
-| Kaşarlı Tost | 240 TL | Patates kızartması, domates ve salatalık eşliğinde. |
 | Sucuklu Tost | 240 TL | Patates kızartması, domates ve salatalık eşliğinde. |
 | Bazlama Karışık Tost | 270 TL | Sucuk, kaşar; yanında patates kızartması, domates ve salatalık. |
 | Bazlama Kaşarlı Tost | 250 TL | Patates kızartması, domates ve salatalık eşliğinde. |
 | Bazlama Sucuklu Tost | 250 TL | Patates kızartması, domates ve salatalık eşliğinde. |
-| Bazlama Tavuklu Tost | 350 TL | Sotelenmiş tavuk; yanında patates kızartması, domates ve salatalık ile birlikte. |
 
 ## Gözlemeler
 
@@ -331,6 +328,7 @@ Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.
 | --- | --- | --- |
 | Tavuk Wrap | 350 TL | 150 gram tavuk, biber, mantar, mısır, kaşar peyniri; 2 çeşit sos ve patates kızartması eşliğinde. |
 | Tavuk Quesadilla | 370 TL | 150 gram tavuk, kaşar peyniri, biber, mantar; 2 çeşit sos ve patates kızartması eşliğinde. |
+| Tavuk Bazlama | 350 TL | Sotelenmiş tavuk; yanında patates kızartması, domates ve salatalık ile birlikte. |
 
 ## Nargileler
 

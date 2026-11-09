@@ -4,7 +4,7 @@
 
 Tek içerik kaynağı: `source/LOBBY_PREMIUM_ANA_MENU.md`. Başlık `LOBBY PREMIUM CAFE` olarak korundu; ziyaretçi markası `LOBBY PREMIUM LOUNGE`.
 
-Ürün adları, açıklamalar, dolu fiyatlar, kategori sırası ve ürün sırası kaynakla alan bazında karşılaştırıldı. **Fark: 0.** Başlangıç veri modeli 25 kategori, 175 ürün ve 4 null fiyat içerir. Burger veya Hemingway ürünü bulunmaz. Aynı isimli ürünleri kategoriler arasında birleştiren işlem yapılmadı.
+Ürün adları, açıklamalar, dolu fiyatlar, kategori sırası ve ürün sırası kaynakla alan bazında karşılaştırıldı. **Fark: 0.** Başlangıç veri modeli 25 kategori, 173 ürün ve 4 null fiyat içerir. Burger veya Hemingway ürünü bulunmaz. Aynı isimli ürünleri kategoriler arasında birleştiren işlem yapılmadı.
 
 | Kategori | Ürün sayısı |
 | --- | ---: |
@@ -29,17 +29,17 @@ Tek içerik kaynağı: `source/LOBBY_PREMIUM_ANA_MENU.md`. Başlık `LOBBY PREMI
 | Pizzalar | 6 |
 | Salatalar | 4 |
 | Makarnalar | 6 |
-| Tostlar | 7 |
+| Tostlar | 4 |
 | Gözlemeler | 5 |
-| Wrap / Quesadilla | 2 |
+| Wrap / Quesadilla | 3 |
 | Nargileler | 5 |
-| **Toplam** | **175** |
+| **Toplam** | **173** |
 
 Boş fiyatlar: Klasik Waffle, Beyaz Çikolatalı Waffle, Filtre Kahve ve Churchill. Fiyatlar 0 veya metinle doldurulmadı. Gözlemelerin ortak servis notu kategori açıklamasına aynen aktarıldı.
 
 ## Prompt ile Markdown arasındaki açık metin farkı
 
-Ürün: **Bazlama Tavuklu Tost**.
+Ürün: **Tavuk Bazlama** (önceki adı Bazlama Tavuklu Tost).
 
 - Prompt: “Sotelenmiş tavuk yanında patates kızartması, domates, salatalık ile birlikte”
 - Kaynak: “Sotelenmiş tavuk; yanında patates kızartması, domates ve salatalık ile birlikte.”
@@ -49,10 +49,10 @@ Diğer onaylı ürün adları/fiyatları kaynağa uyuyor. Smoothie çeşitlerini
 
 ## Çalıştırılan kontroller
 
-**23 kontrol geçti.**
+**24 kontrol geçti.**
 
 - Source checksum and title preserved: başarılı.
-- Independent field comparison of all 175 products and 25 categories: başarılı.
+- Independent field comparison of all 173 products and 25 categories: başarılı.
 - Only the four unpriced additions have null prices: başarılı.
 - Approved prices, names, and category note: başarılı.
 - Turkish case, decomposed Unicode, and ASCII search: başarılı.
@@ -64,6 +64,7 @@ Diğer onaylı ürün adları/fiyatları kaynağa uyuyor. Smoothie çeşitlerini
 - Price update, clearing, restart durability and no reseed overwrite: başarılı.
 - Stale and racing revisions cannot overwrite saved data: başarılı.
 - Only administrator actions mutate data; audit and exports preserved: başarılı.
+- Tost revizyonu mevcut ürün kimliklerini ve kayıtlı yönetici düzenlemelerini korur.
 - Public menu renders without authentication and exposes exact source data: başarılı.
 - Every admin endpoint denies anonymous access: başarılı.
 - Real scrypt login rejects bad credentials and creates secure server sessions: başarılı.

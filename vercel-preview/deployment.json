@@ -1,12 +1,12 @@
 {
   "projectId": "prj_Vr51OonR5o99kPzVIJ0QLtl3NOUM",
   "orgId": "team_2jOTgiQX5BhrqRdoM3FcaMWW",
-  "deploymentId": "dpl_86ihNtNuXebYmPEdoD5Gw2z7MuEk",
+  "deploymentId": "dpl_CfeXpo8HxgJvxQJyKcvwSBvsG8e2",
   "url": "https://lobby-premium-menu-preview.vercel.app",
   "menuUrl": "https://lobby-premium-menu-preview.vercel.app/men%C3%BC",
-  "immutableUrl": "https://lobby-premium-menu-preview-kc6tzczhs-sadik-ustas-projects.vercel.app",
+  "immutableUrl": "https://lobby-premium-menu-preview-k70bc4ljv-sadik-ustas-projects.vercel.app",
   "state": "READY",
   "target": "production",
-  "purpose": "Menu revision with waffles, filter coffee, Churchill, Red Bull, hookah and chicken descriptions.",
+  "purpose": "Remove Karışık Tost and Kaşarlı Tost and move Tavuk Bazlama to Wrap / Quesadilla.",
   "authentication": "Public: Vercel SSO, password and IP protections are disabled; no expiring share link is used."
 }

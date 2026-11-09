@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceTitle": "LOBBY PREMIUM CAFE",
-  "sourceSha256": "55fa35e4f934a191ca97b1d6f8f0e1f1eece4fd7a8097a7bb846bedcd50817d4",
+  "sourceSha256": "0de1e16544c452b23341b4389e6adb37a05958c57d6a7cc1430a0d2514353ba2",
   "categories": [
     {
       "id": "cat-01",
@@ -185,7 +185,7 @@
       "description": "Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.",
       "sortOrder": 22,
       "sourceName": "Gözlemeler",
-      "sourceLine": 316
+      "sourceLine": 313
     },
     {
       "id": "cat-23",
@@ -193,7 +193,7 @@
       "description": "",
       "sortOrder": 23,
       "sourceName": "Wrap / Quesadilla",
-      "sourceLine": 328
+      "sourceLine": 325
     },
     {
       "id": "cat-24",
@@ -201,7 +201,7 @@
       "description": "",
       "sortOrder": 24,
       "sourceName": "Nargileler",
-      "sourceLine": 335
+      "sourceLine": 333
     }
   ],
   "products": [
@@ -1922,37 +1922,15 @@
       "sourceLine": 302
     },
     {
-      "id": "cat-21-item-01",
-      "categoryId": "cat-21",
-      "name": "Karışık Tost",
-      "description": "Sucuk, kaşar; yanında patates kızartması, domates ve salatalık.",
-      "price": 260,
-      "sortOrder": 0,
-      "sourceCategoryId": "cat-21",
-      "sourceCategoryName": "Tostlar",
-      "sourceLine": 308
-    },
-    {
-      "id": "cat-21-item-02",
-      "categoryId": "cat-21",
-      "name": "Kaşarlı Tost",
-      "description": "Patates kızartması, domates ve salatalık eşliğinde.",
-      "price": 240,
-      "sortOrder": 1,
-      "sourceCategoryId": "cat-21",
-      "sourceCategoryName": "Tostlar",
-      "sourceLine": 309
-    },
-    {
       "id": "cat-21-item-03",
       "categoryId": "cat-21",
       "name": "Sucuklu Tost",
       "description": "Patates kızartması, domates ve salatalık eşliğinde.",
       "price": 240,
-      "sortOrder": 2,
+      "sortOrder": 0,
       "sourceCategoryId": "cat-21",
       "sourceCategoryName": "Tostlar",
-      "sourceLine": 310
+      "sourceLine": 308
     },
     {
       "id": "cat-21-item-04",
@@ -1960,10 +1938,10 @@
       "name": "Bazlama Karışık Tost",
       "description": "Sucuk, kaşar; yanında patates kızartması, domates ve salatalık.",
       "price": 270,
-      "sortOrder": 3,
+      "sortOrder": 1,
       "sourceCategoryId": "cat-21",
       "sourceCategoryName": "Tostlar",
-      "sourceLine": 311
+      "sourceLine": 309
     },
     {
       "id": "cat-21-item-05",
@@ -1971,10 +1949,10 @@
       "name": "Bazlama Kaşarlı Tost",
       "description": "Patates kızartması, domates ve salatalık eşliğinde.",
       "price": 250,
-      "sortOrder": 4,
+      "sortOrder": 2,
       "sourceCategoryId": "cat-21",
       "sourceCategoryName": "Tostlar",
-      "sourceLine": 312
+      "sourceLine": 310
     },
     {
       "id": "cat-21-item-06",
@@ -1982,21 +1960,10 @@
       "name": "Bazlama Sucuklu Tost",
       "description": "Patates kızartması, domates ve salatalık eşliğinde.",
       "price": 250,
-      "sortOrder": 5,
+      "sortOrder": 3,
       "sourceCategoryId": "cat-21",
       "sourceCategoryName": "Tostlar",
-      "sourceLine": 313
-    },
-    {
-      "id": "cat-21-item-07",
-      "categoryId": "cat-21",
-      "name": "Bazlama Tavuklu Tost",
-      "description": "Sotelenmiş tavuk; yanında patates kızartması, domates ve salatalık ile birlikte.",
-      "price": 350,
-      "sortOrder": 6,
-      "sourceCategoryId": "cat-21",
-      "sourceCategoryName": "Tostlar",
-      "sourceLine": 314
+      "sourceLine": 311
     },
     {
       "id": "cat-22-item-01",
@@ -2007,7 +1974,7 @@
       "sortOrder": 0,
       "sourceCategoryId": "cat-22",
       "sourceCategoryName": "Gözlemeler",
-      "sourceLine": 320
+      "sourceLine": 317
     },
     {
       "id": "cat-22-item-02",
@@ -2018,7 +1985,7 @@
       "sortOrder": 1,
       "sourceCategoryId": "cat-22",
       "sourceCategoryName": "Gözlemeler",
-      "sourceLine": 321
+      "sourceLine": 318
     },
     {
       "id": "cat-22-item-03",
@@ -2029,7 +1996,7 @@
       "sortOrder": 2,
       "sourceCategoryId": "cat-22",
       "sourceCategoryName": "Gözlemeler",
-      "sourceLine": 322
+      "sourceLine": 319
     },
     {
       "id": "cat-22-item-04",
@@ -2040,7 +2007,7 @@
       "sortOrder": 3,
       "sourceCategoryId": "cat-22",
       "sourceCategoryName": "Gözlemeler",
-      "sourceLine": 323
+      "sourceLine": 320
     },
     {
       "id": "cat-22-item-05",
@@ -2051,7 +2018,7 @@
       "sortOrder": 4,
       "sourceCategoryId": "cat-22",
       "sourceCategoryName": "Gözlemeler",
-      "sourceLine": 324
+      "sourceLine": 321
     },
     {
       "id": "cat-23-item-01",
@@ -2062,7 +2029,7 @@
       "sortOrder": 0,
       "sourceCategoryId": "cat-23",
       "sourceCategoryName": "Wrap / Quesadilla",
-      "sourceLine": 332
+      "sourceLine": 329
     },
     {
       "id": "cat-23-item-02",
@@ -2073,7 +2040,18 @@
       "sortOrder": 1,
       "sourceCategoryId": "cat-23",
       "sourceCategoryName": "Wrap / Quesadilla",
-      "sourceLine": 333
+      "sourceLine": 330
+    },
+    {
+      "id": "cat-21-item-07",
+      "categoryId": "cat-23",
+      "name": "Tavuk Bazlama",
+      "description": "Sotelenmiş tavuk; yanında patates kızartması, domates ve salatalık ile birlikte.",
+      "price": 350,
+      "sortOrder": 2,
+      "sourceCategoryId": "cat-23",
+      "sourceCategoryName": "Wrap / Quesadilla",
+      "sourceLine": 331
     },
     {
       "id": "cat-24-item-01",
@@ -2084,7 +2062,7 @@
       "sortOrder": 0,
       "sourceCategoryId": "cat-24",
       "sourceCategoryName": "Nargileler",
-      "sourceLine": 339
+      "sourceLine": 337
     },
     {
       "id": "cat-24-item-02",
@@ -2095,7 +2073,7 @@
       "sortOrder": 1,
       "sourceCategoryId": "cat-24",
       "sourceCategoryName": "Nargileler",
-      "sourceLine": 340
+      "sourceLine": 338
     },
     {
       "id": "cat-24-item-03",
@@ -2106,7 +2084,7 @@
       "sortOrder": 2,
       "sourceCategoryId": "cat-24",
       "sourceCategoryName": "Nargileler",
-      "sourceLine": 341
+      "sourceLine": 339
     },
     {
       "id": "cat-24-item-04",
@@ -2117,7 +2095,7 @@
       "sortOrder": 3,
       "sourceCategoryId": "cat-24",
       "sourceCategoryName": "Nargileler",
-      "sourceLine": 342
+      "sourceLine": 340
     },
     {
       "id": "cat-24-item-05",
@@ -2128,7 +2106,7 @@
       "sortOrder": 4,
       "sourceCategoryId": "cat-24",
       "sourceCategoryName": "Nargileler",
-      "sourceLine": 343
+      "sourceLine": 341
     }
   ]
 }

@@ -16,7 +16,7 @@ const source=fs.readFileSync('source/LOBBY_PREMIUM_ANA_MENU.md','utf8');
 check('Source checksum and title preserved',()=>{assert.equal(initial.sourceSha256,createHash('sha256').update(source).digest('hex'));assert.equal(initial.sourceTitle,'LOBBY PREMIUM CAFE');});
 const sections=source.replace(/^\uFEFF/,'').split(/^## /m).slice(3);
 const fieldDifferences=[];
-check('Independent field comparison of all 175 products and 25 categories',()=>{
+check('Independent field comparison of all 173 products and 25 categories',()=>{
  assert.equal(sections.length,25);
  for(let i=0;i<sections.length;i++){
   const lines=sections[i].split(/\r?\n/),name=lines.shift(),c=initial.categories[i];assert.equal(c.name,name);assert.equal(c.sortOrder,i);
@@ -24,10 +24,10 @@ check('Independent field comparison of all 175 products and 25 categories',()=>{
   const products=initial.products.filter(p=>p.categoryId===c.id);assert.equal(rows.length,products.length);
   rows.forEach((row,j)=>{const [n,price,d]=row.split('|').slice(1,-1).map(s=>s.trim());const expected={name:n,description:d,price:price?Number(price.replace(' TL','').replace(',','.')):null};for(const key of Object.keys(expected)){if(products[j][key]!==expected[key])fieldDifferences.push({id:products[j].id,field:key,expected:expected[key],actual:products[j][key]});}assert.equal(products[j].sortOrder,j);});
  }
- assert.deepEqual(fieldDifferences,[]);assert.equal(initial.products.length,175);validateMenu(initial);
+ assert.deepEqual(fieldDifferences,[]);assert.equal(initial.products.length,173);validateMenu(initial);
 });
 check('Only the four unpriced additions have null prices',()=>{const blank=initial.products.filter(p=>p.price===null).map(p=>p.name);assert.deepEqual(blank,['Filtre Kahve','Churchill','Klasik Waffle','Beyaz Çikolatalı Waffle']);assert.ok(!initial.categories.some(c=>c.id==='cat-14'||c.name==='Sandviçler'));assert.ok(!initial.products.some(p=>/burger|hemingway|kruvasan/i.test(p.name)));});
-check('Approved prices, names, and category note',()=>{const prices={'Akdeniz Salata':250,'Karışık Pizza':350,'Kremalı Tavuklu Penne':380,'Penne Arrabbiata':310,'Bazlama Tavuklu Tost':350,'Red Bull':150,'Vejetaryen Pizza':290};for(const [name,price]of Object.entries(prices))assert.equal(initial.products.find(p=>p.name===name)?.price,price);assert.ok(initial.products.filter(p=>p.categoryId==='cat-07').every(p=>p.price===180));for(const name of ["Devil's Cake",'Kuzukulağı'])assert.ok(initial.products.some(p=>p.name===name));assert.equal(initial.categories.find(c=>c.name==='Gözlemeler').description,'Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.');});
+check('Approved prices, names, and category note',()=>{const prices={'Akdeniz Salata':250,'Karışık Pizza':350,'Kremalı Tavuklu Penne':380,'Penne Arrabbiata':310,'Tavuk Bazlama':350,'Red Bull':150,'Vejetaryen Pizza':290};for(const [name,price]of Object.entries(prices))assert.equal(initial.products.find(p=>p.name===name)?.price,price);assert.ok(initial.products.filter(p=>p.categoryId==='cat-07').every(p=>p.price===180));for(const name of ["Devil's Cake",'Kuzukulağı'])assert.ok(initial.products.some(p=>p.name===name));assert.equal(initial.categories.find(c=>c.name==='Gözlemeler').description,'Tüm gözlemeler domates, salatalık ve zeytin eşliğinde servis edilir.');});
 check('Turkish case, decomposed Unicode, and ASCII search',()=>{assert.equal(normalizeSearch('SICAK İÇECEKLER'),normalizeSearch('sıcak içecekler'));assert.equal(normalizeSearch('ÇİLEKLİ'),normalizeSearch('çilekli'));assert.equal(normalizeSearch('KUŞBURNU'),normalizeSearch('kusburnu'));assert.equal(normalizeSearch('İ'.normalize('NFD')),normalizeSearch('i'));assert.ok(normalizeSearch(initial.products.find(p=>p.name==='Vejetaryen Pizza').description).includes(normalizeSearch('DİLİMLİ SİYAH ZEYTİN')));});
 check('Null display empty and TL decimal precision',()=>{assert.equal(formatPrice(null),'');assert.equal(formatPrice(180.25),'180,25 TL');assert.equal(formatPrice(180),'180 TL');});
 check('Reject invalid edits and preserve immutable source provenance',()=>{for(const price of [-1,NaN,Infinity,12.001,'180']){const m=clone();m.products[0].price=price;assert.throws(()=>validateMenu(m));}const m=clone();m.products[0].sourceCategoryName='changed';assert.throws(()=>validateMenu(m));const n=clone();n.products[1].id=n.products[0].id;assert.throws(()=>validateMenu(n));const d=clone();d.products.pop();assert.throws(()=>validateMenu(d));});
@@ -83,7 +83,29 @@ await asyncCheck('Existing saved menu receives the November update once and keep
  assert.deepEqual(updated.menu.products.filter(p=>p.categoryId===hookah).map(p=>p.price),[550,600,650,750,1000]);
  assert.equal((await readMenu()).revision,updated.revision);
 });
+await asyncCheck('Toast revision keeps product IDs and saved edits while removing and moving the requested rows',async()=>{
+ const old=clone();
+ old.sourceSha256='55fa35e4f934a191ca97b1d6f8f0e1f1eece4fd7a8097a7bb846bedcd50817d4';
+ const moved=old.products.find(p=>p.id==='cat-21-item-07');
+ Object.assign(moved,{name:'Bazlama Tavuklu Tost',categoryId:'cat-21',sourceCategoryId:'cat-21',sourceCategoryName:'Tostlar',price:355});
+ const toasts=[['cat-21-item-01','Karışık Tost'],['cat-21-item-02','Kaşarlı Tost']];
+ for(const [id,name] of toasts)old.products.push({...moved,id,name});
+ const hookah=old.products.find(p=>p.name==='Lobby Premium');
+ Object.assign(hookah,{name:'Yönetici adı',price:655});
+ const savedToast=old.products.find(p=>p.id==='cat-21-item-04');
+ savedToast.price=275;
+ sqlite.prepare('UPDATE menu_state SET content=? WHERE id=?').run(JSON.stringify(old),'main');
+ const {menu,revision}=await readMenu();
+ validateMenu(menu);
+ assert.deepEqual(menu.products.filter(p=>p.categoryId==='cat-21').map(p=>p.id),['cat-21-item-03','cat-21-item-04','cat-21-item-05','cat-21-item-06']);
+ assert.deepEqual(menu.products.filter(p=>p.categoryId==='cat-23').map(p=>p.name),['Tavuk Wrap','Tavuk Quesadilla','Tavuk Bazlama']);
+ assert.ok(toasts.every(([id])=>!menu.products.some(p=>p.id===id)));
+ assert.deepEqual(menu.products.find(p=>p.id===moved.id),{...initial.products.find(p=>p.id===moved.id),price:355});
+ assert.deepEqual(menu.products.find(p=>p.id===hookah.id),hookah);
+ assert.equal(menu.products.find(p=>p.id===savedToast.id).price,275);
+ assert.equal((await readMenu()).revision,revision);
+});
 sqlite.close();fs.rmSync(dbPath);
-const report={categoryCount:25,productCount:175,nullPrices:4,counts:initial.categories.map(c=>({category:c.name,count:initial.products.filter(p=>p.categoryId===c.id).length})),fieldDifferences,tests};
+const report={categoryCount:25,productCount:173,nullPrices:4,counts:initial.categories.map(c=>({category:c.name,count:initial.products.filter(p=>p.categoryId===c.id).length})),fieldDifferences,tests};
 fs.mkdirSync('docs',{recursive:true});fs.writeFileSync('docs/validation.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({passed:tests.length,failed:0,fieldDifferences:fieldDifferences.length,counts:report.counts}));
